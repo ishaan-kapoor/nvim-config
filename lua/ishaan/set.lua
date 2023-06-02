@@ -20,5 +20,8 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = {"80", "120"}
 
 vim.opt.termguicolors = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 
+vim.g.loaded_perl_provide = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.python3_host_prog = "/usr/bin/python3"
