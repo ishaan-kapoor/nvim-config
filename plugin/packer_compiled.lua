@@ -84,16 +84,6 @@ _G.packer_plugins = {
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
-  ["emmet-vim"] = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/emmet-vim",
-    url = "https://github.com/mattn/emmet-vim"
-  },
-  ["gesture.nvim"] = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/gesture.nvim",
-    url = "https://github.com/notomo/gesture.nvim"
-  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -104,10 +94,16 @@ _G.packer_plugins = {
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
   },
-  ["nvim-treesitter"] = {
+  ["nvim-tree.lua"] = {
     loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
-    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/ishaan/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -119,45 +115,20 @@ _G.packer_plugins = {
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  tagbar = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/tagbar",
-    url = "https://github.com/preservim/tagbar"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ultisnips = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/ultisnips",
-    url = "https://github.com/sirver/ultisnips"
   },
   undotree = {
     loaded = true,
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
-  ["vim-visual-multi"] = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
-    url = "https://github.com/mg979/vim-visual-multi"
-  },
   ["vim-wakatime"] = {
     loaded = true,
     path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/vim-wakatime",
     url = "https://github.com/wakatime/vim-wakatime"
-  },
-  vimtex = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/vimtex",
-    url = "https://github.com/lervag/vimtex"
-  },
-  ["wal.vim"] = {
-    loaded = true,
-    path = "/home/ishaan/.local/share/nvim/site/pack/packer/start/wal.vim",
-    url = "https://github.com/dylanaraps/wal.vim"
   }
 }
 
