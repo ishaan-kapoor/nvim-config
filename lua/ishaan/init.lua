@@ -15,12 +15,3 @@ autocmd('TextYankPost', {
         })
     end,
 })
-
--- autocommand that reloads neovim and syncs plugins when plugin file is saved
-vim.cmd([[ 
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost packer.lua source <afile> | PackerSync
-  augroup end
-]])
-

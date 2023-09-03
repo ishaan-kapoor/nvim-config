@@ -17,10 +17,17 @@ if not status then
   return
 end
 
+-- autocommand that reloads neovim and syncs plugins when plugin file is saved
+-- vim.cmd([[ 
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost packer.lua source <afile> | PackerSync
+--   augroup end
+-- ]])
 
 -- vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function(use)
+packer.startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use({
@@ -29,7 +36,7 @@ return require('packer').startup(function(use)
   })
   -- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
-  -- use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
   use('mbbill/undotree')
 
@@ -43,10 +50,12 @@ return require('packer').startup(function(use)
 
   -- use("szw/vim-maximizer")
 
+  -- use("RRethy/vim-illuminate")
+
   -- use('mg979/vim-visual-multi', { branch = 'master' })
 
   use('github/copilot.vim')
-  
+
   -- use('mattn/emmet-vim')
 
   use('lewis6991/impatient.nvim')
@@ -75,5 +84,26 @@ return require('packer').startup(function(use)
       requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     })
 
+  -- Cmp 
+  use ("hrsh7th/nvim-cmp") -- The completion plugin
+  use ("hrsh7th/cmp-buffer") -- buffer completions
+  use ("hrsh7th/cmp-path") -- path completions
+  use ("saadparwaiz1/cmp_luasnip") -- snippet completions
+  use ("hrsh7th/cmp-nvim-lsp")
+  use ("hrsh7th/cmp-nvim-lua")
+
+  -- Snippets
+  use ("L3MON4D3/LuaSnip") --snippet engine
+  use ("rafamadriz/friendly-snippets") -- a bunch of snippets to use
+
+  -- LSP
+  use ("williamboman/mason.nvim")
+  use ("williamboman/mason-lspconfig.nvim")
+  use ("neovim/nvim-lspconfig")
+  -- use ("jose-elias-alvarez/null-ls.nvim")
+
 
 end)
+
+vim.cmd([[ PackerSync ]])
+

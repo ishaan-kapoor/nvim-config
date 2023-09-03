@@ -26,7 +26,7 @@ vim.keymap.set("n", "x", '"_x', {desc = "Delete single char without yanking"})
 vim.keymap.set("x", "p", [["_dP]], {desc = "Paste over selected text"})
 vim.keymap.set("v", "<C-C>", [["+y]])
 vim.keymap.set("n", "<C-C>", [["+yy]])
-vim.keymap.set({"n", "v"}, "<C-V>", [["+p]])
+-- vim.keymap.set({"n", "v"}, "<C-V>", [["+p]])
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<C-L>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -34,6 +34,8 @@ vim.keymap.set("n", "<C-L>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left
 -- Increment and Decrement Numbers
 vim.keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment Number Under Cursor" })
 vim.keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement Number Under Cursor" })
+
+vim.keymap.set("n", "<leader>w", "<C-w>", { desc = "Split Vertically" })
 
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split Vertically" })
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split Horizontally" })

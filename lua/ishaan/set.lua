@@ -35,6 +35,8 @@ vim.opt.splitbelow = true
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
+vim.api.nvim_set_hl(0, "Pmenu", { ctermbg=gray, bg=gray, blend=10 })
+
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
