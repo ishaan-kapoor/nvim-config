@@ -19,7 +19,7 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 7
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = {"80", "120"}
 vim.opt.cursorline = true
@@ -34,6 +34,7 @@ vim.opt.splitbelow = true
 
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
+vim.opt.cmdheight = 2
 
 vim.api.nvim_set_hl(0, "Pmenu", { ctermbg="gray", bg="gray", blend=10 })
 
@@ -45,6 +46,8 @@ vim.opt.listchars:append "multispace:⋅⋅⋅󱁐"
 vim.opt.listchars:append "tab:-->"
 vim.opt.listchars:append "eol:↴"
 vim.opt.listchars:append "conceal:"
+
+vim.opt.path:append "**"
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
