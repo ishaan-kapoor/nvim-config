@@ -37,7 +37,7 @@ vim.keymap.set('n', "<C-c>", [["+yy]], { desc = "Copy to clipboard with ctrl+C" 
 -- vim.keymap.set({'n','v'}, "<C-v>", [["+p]], { desc = "Paste from clipboard"}) -- Disabled for blocking visual block selection
 
 vim.keymap.set('n', "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word under cursor, in the entire file" })
-vim.keymap.set('n', "<C-L>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word under cursor, in the entire file" })
+-- vim.keymap.set('n', "<C-L>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search and replace word under cursor, in the entire file" }) -- diabled as it clashes with vim tmux navigator
 
 -- Increment and Decrement Numbers
 vim.keymap.set('n', "<leader>+", "<C-a>", { desc = "Increment Number Under Cursor" })
