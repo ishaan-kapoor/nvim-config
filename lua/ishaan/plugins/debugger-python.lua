@@ -6,7 +6,8 @@ local plugin = {
         'rcarriga/nvim-dap-ui',
         -- 'nvim-telescope/telescope-dap.nvim',
     },
-    ft = { 'python' },
+    -- ft = { 'python' },
+    event = "VeryLazy",
     -- keys = {
     --     {"<leader>dpr", function() require("dap-python").test_method() end, },
     -- }
@@ -18,4 +19,4 @@ function plugin.config()
     require('dap-python').setup(path)
 end
 
-return plugin
+return {} --plugin

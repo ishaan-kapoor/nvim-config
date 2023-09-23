@@ -1,6 +1,7 @@
 local plugin = {
     'hrsh7th/nvim-cmp',
-    event = { 'VeryLazy', 'InsertEnter' },
+    event = { 'InsertEnter' },
+    -- event = { 'VeryLazy', 'InsertEnter' },
     dependencies = {
         'hrsh7th/cmp-buffer', -- buffer completions
         'hrsh7th/cmp-path', -- path completions

@@ -4,8 +4,9 @@ local plugin = {
     "williamboman/mason-lspconfig.nvim",
     -- "jayp0521/mason-null-ls.nvim",
   },
-  -- event = "VeryLazy",
+  event = "VeryLazy",
   priority = 99,
+  -- ft = { "c", "cpp", "python", "lua", "rust" },
 }
 
 function plugin.config()

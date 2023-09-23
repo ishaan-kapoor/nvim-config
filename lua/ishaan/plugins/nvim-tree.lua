@@ -7,6 +7,8 @@ local plugin = {
         { "<leader>ee", ":NvimTreeFocus<CR>", desc = "Focus file explorer" },
         { "<leader>ec", "<cmd>NvimTreeCollapse<CR>", desc = "Collapse file explorer" },
 	},
+    -- event = { "BufWinEnter" },
+    event = { "VeryLazy" },
 }
 
 local function on_attach(bufnr)
@@ -30,7 +32,10 @@ function plugin.config()
     vim.g.loaded_netrwPlugin = 1
 
     nvim_tree.setup({
-        view = { width = 35 },
+        view = {
+            width = 35,
+            side = "right",
+        },
         -- disable window_picker for explorer to work well with window splits
         actions = {
             open_file = {

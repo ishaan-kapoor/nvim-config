@@ -1,6 +1,7 @@
 local plugin = {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
+    -- event = "VaryLazy",
     build = ":TSUpdate",
 }
 
@@ -11,7 +12,7 @@ function plugin.config()
     -- configure treesitter
     treesitter.setup({
         indent = { enable = true },  -- enable indentation
-        ensure_installed = { "python", "cpp", "c", "lua", "vim", "query" },  -- ensure these language parsers are installed
+        ensure_installed = { "python", "cpp", "c", "lua", "vim", "query", "regex", "bash", "markdown", "markdown_inline" },  -- ensure these language parsers are installed
         sync_install = false,
         auto_install = false,  -- auto install above language parsers
         highlight = {  -- enable syntax highlighting

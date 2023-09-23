@@ -1,3 +1,4 @@
+require("ishaan.tools")
 require("ishaan.set")
 require("ishaan.remap")
 require("ishaan.vimscript")

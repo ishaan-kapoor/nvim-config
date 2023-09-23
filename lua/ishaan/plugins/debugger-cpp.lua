@@ -1,6 +1,6 @@
 local plugin = {
     "jay-babu/mason-nvim-dap.nvim",
-    ft = { "cpp", "c", "rust" },
+    -- ft = { "cpp", "c", "rust" },
     dependencies = {
         "williamboman/mason.nvim",
         "mfussenegger/nvim-dap",
@@ -8,8 +8,8 @@ local plugin = {
     opts = {
         handlers = {},
     },
-    -- event = "VeryLazy"
+    event = "VeryLazy"
 }
 
-return plugin
+return {} -- plugin
 

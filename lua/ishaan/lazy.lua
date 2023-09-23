@@ -12,38 +12,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    -- 'christoomey/vim-tmux-navigator',
-    -- 'RRethy/vim-illuminate',
     -- { 'mg979/vim-visual-multi', { branch = 'master' } },
     -- 'mattn/emmet-vim',
     -- 'notomo/gesture.nvim',
-    -- 'preservim/tagbar',
     -- 'lervag/vimtex',
     -- 'sirver/ultisnips',
     -- 'mhinz/neovim-remote',
     -- 'dylanaraps/wal.vim',
     -- 'jpalardy/vim-slime',
-    -- { 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true } },
-    -- Cmp 
-    {
-        'hrsh7th/nvim-cmp', -- The completion plugin
-        dependencies = {
-            'hrsh7th/cmp-buffer', -- buffer completions
-            'hrsh7th/cmp-path', -- path completions
-            { 'saadparwaiz1/cmp_luasnip', dependencies = {'L3MON4D3/LuaSnip'} }, -- snippet completions
-            'hrsh7th/cmp-nvim-lua',
-            { 'hrsh7th/cmp-nvim-lsp', dependencies = {
-                { 'neovim/nvim-lspconfig', dependencies = {
-                    'nvim-lua/plenary.nvim',
-                    { 'williamboman/mason-lspconfig.nvim', dependencies = {'williamboman/mason.nvim'} },
-                    -- 'jose-elias-alvarez/null-ls.nvim',
-                } },
-            } }, -- lsp completions
-        }
-    },
-
 }
 
-local opts = { change_detection = { notify = false, }, }
+local opts = {
+  change_detection = { notify = false, },
+  -- defaults = { lazy = true}
+}
 
-require("lazy").setup('ishaan.plugins', opts)
+require("lazy").setup("ishaan.plugins", opts)
