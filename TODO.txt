@@ -1,0 +1,6 @@
+ftplugin folder
+tab spaces for everyfile should be different
+Normal Code run needs to be better
+Verilog and Asspebly setup
+disable tab space checker for text files
+
