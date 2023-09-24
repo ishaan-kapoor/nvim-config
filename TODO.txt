@@ -1,6 +1,12 @@
 ftplugin folder
 tab spaces for everyfile should be different
 Normal Code run needs to be better
-Verilog and Asspebly setup
+Verilog and Assembly setup
 disable tab space checker for text files
+switch copilot.vim to a lua alternative to better amalgamate with tab completion. i.e. "zbirenbaum/copilot.lua"
+    sample: https://github.com/nicknisi/dotfiles/blob/main/config/nvim/lua/plugins/extras/copilot.lua
+use copilot other options than accept and dismiss
+use something like benmills/vimux to run buffer in a tmux pane
 
+typo support: cmd([[abbr teh the]])
+git worktrees look awesome, check them out (source: the primegen)

@@ -45,11 +45,16 @@ vim.api.nvim_set_hl(0, "Pmenu", { ctermbg="gray", bg="gray", blend=10 })
 vim.lsp.set_log_level("debug")
 
 vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "multispace:⋅⋅⋅󱁐"
-vim.opt.listchars:append "tab:> " -- "tab:-->"
-vim.opt.listchars:append "eol:$" -- "eol:↴"
-vim.opt.listchars:append "conceal:"
+vim.opt.listchars = {
+    space = "⋅",
+    multispace = "⋅⋅⋅󱁐",
+    tab = "» ",
+    eol = "↴",
+    conceal = "",
+    nbsp = "•",
+    extends = "❯",
+    precedes = "❮",
+}
 
 vim.opt.path:append "**"
 

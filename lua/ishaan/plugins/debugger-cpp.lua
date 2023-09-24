@@ -8,8 +8,9 @@ local plugin = {
     opts = {
         handlers = {},
     },
-    event = "VeryLazy"
+    -- event = "VeryLazy",
+    lazy = true
 }
 
-return {} -- plugin
+return plugin
 

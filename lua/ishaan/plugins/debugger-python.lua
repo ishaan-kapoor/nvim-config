@@ -7,10 +7,11 @@ local plugin = {
         -- 'nvim-telescope/telescope-dap.nvim',
     },
     -- ft = { 'python' },
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     -- keys = {
     --     {"<leader>dpr", function() require("dap-python").test_method() end, },
     -- }
+    lazy = true,
 }
 
 function plugin.config()
@@ -19,4 +20,4 @@ function plugin.config()
     require('dap-python').setup(path)
 end
 
-return {} --plugin
+return plugin

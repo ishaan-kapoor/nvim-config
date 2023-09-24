@@ -69,6 +69,9 @@ function plugin.config()
                     ["<C-k>"] = actions.move_selection_previous, -- move to prev result
                     ["<C-j>"] = actions.move_selection_next, -- move to next result
                     ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
+                    ["<C-t>"] = actions.select_tab,
+                    ["<C-y>"] = actions.preview_scrolling_up,
+                    ["<C-e>"] = actions.preview_scrolling_down,
                 },
             },
         },
