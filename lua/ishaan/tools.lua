@@ -1,6 +1,10 @@
 function ApplyTransparency()
     vim.api.nvim_set_hl(0, "Normal", { bg = nil })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
+    vim.api.nvim_set_hl(0, "Whitespace", { bg = nil })
+    vim.api.nvim_set_hl(0, "SpecialKey", { bg = nil })
+    vim.api.nvim_set_hl(0, "NonText", { bg = nil })
+
 end
 
 function ApplyColorScheme(color)

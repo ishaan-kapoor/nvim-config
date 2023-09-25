@@ -1,11 +1,18 @@
 local gruvbox = {
     "ellisonleao/gruvbox.nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
+    config = function()
+        require("gruvbox").setup()
+        ApplyColorScheme("gruvbox")
+    end,
 }
-function gruvbox.config()
-    require("gruvbox").setup()
-    ApplyColorScheme("gruvbox")
-end
 
-return gruvbox
+local themes = {
+    gruvbox,
+}
+
+-- ApplyColorScheme("firefly-pro-bright")
+ApplyColorScheme("volatile")
+
+return themes

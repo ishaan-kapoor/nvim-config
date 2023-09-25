@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# if $1 is empty exit
+if [ -z "$1" ]; then
+    echo "No file supplied"
+    exit 1
+fi
+
+cd ~/.config/nvim/Resources/ || exit
+
+sed -i "/\/\//d" "$1"
+python3 -m json.tool "$1" | sponge "$1" # install moreutils for sponge
+./djanho -l "$1"
+mv ./generated.lua ../colors/${1%.json}.lua
+

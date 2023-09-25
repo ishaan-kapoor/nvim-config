@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# if $1 is empty exit
+if [ -z "$1" ]; then
+    echo "No link supplied"
+    exit 1
+fi
+
+cd ~/.config/nvim/Resources/ || exit
+
+git clone --depth 1 "$1"
+
+dir=$(basename $(echo "$1" | sed 's/\.git$//')) || exit
+mv "$dir/themes" ./ || exit
+rm -rf "$dir"
+
+cd themes || exit
+rm ui-key-tester.json
+
+for i in *.json; do
+    echo "Converting $i"
+    set +e
+    (python3 -m json.tool "$i" | sponge "$i") && # install moreutils for sponge
+    ../djanho -l "$i" &&
+    mv ./generated.lua ../../colors/${i%.json}.lua
+    set -e
+    # python3 -m json.tool "$i" | sponge "$i" # install moreutils for sponge
+    # ../djanho -l "$i"
+    # mv ./generated.lua ../../colors/${i%.json}.lua
+done
+
+cd ../
+rm -rf themes
