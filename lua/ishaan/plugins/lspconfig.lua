@@ -1,3 +1,4 @@
+
 local plugin = {
     "neovim/nvim-lspconfig",
     -- event = { "BufReadPre", "BufNewFile" },
@@ -39,42 +40,41 @@ local on_attach = function(client, bufnr)
     })
 
     -- set keybinds
-    -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "gd", function() telescope.lsp_definitions() end, opts)
-    vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts) -- got to declaration
-    -- vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-    vim.keymap.set("n", "gi", function() telescope.lsp_implementations() end, opts)
-    -- vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "gr", function() telescope.lsp_references() end, opts)
-    -- vim.keymap.set("n", "gt", function() vim.lsp.buf.type_definition() end, opts)
-    vim.keymap.set("n", "gt", function() telescope.lsp_type_definitions() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "<leader>vD", function() telescope.diagnostics() end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set({"n","v"}, "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set("n", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set("n", "<leader>wa", function() vim.lsp.buf.add_workspace_folder() end, opts)
-    vim.keymap.set("n", "<leader>wr", function() vim.lsp.buf.remove_workspace_folder() end, opts)
-    vim.keymap.set("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-    vim.keymap.set("n", "<leader>D", function() vim.lsp.buf.type_definition() end, opts)
-    vim.keymap.set("n", "<leader>l", function() vim.lsp.diagnostic.show_line_diagnostics() end, opts)
-    vim.keymap.set("n", "<leader>q", function() vim.lsp.diagnostic.set_loclist() end, opts)
-    vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
-    -- vim.keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
-    -- vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-    -- vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
-    -- vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
-    -- vim.keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
-    -- vim.keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-    -- vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-    -- vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
-    -- vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-    -- vim.keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
+    -- vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', "gd", telescope.lsp_definitions, opts)
+    vim.keymap.set('n', "gD", vim.lsp.buf.declaration, opts) -- got to declaration
+    -- vim.keymap.set('n', "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', "gi", telescope.lsp_implementations, opts)
+    -- vim.keymap.set('n', "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set('n', "gr", telescope.lsp_references, opts)
+    -- vim.keymap.set('n', "gt", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', "gt", telescope.lsp_type_definitions, opts)
+    vim.keymap.set('n', "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
+    vim.keymap.set('n', "<leader>vd", vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', "<leader>vD", telescope.diagnostics, opts)
+    vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set({'n',"v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', "<leader>h", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+    vim.keymap.set('n', "<leader>D", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', "<leader>l", vim.lsp.diagnostic.show_line_diagnostics, opts)
+    vim.keymap.set('n', "<leader>q", vim.lsp.diagnostic.set_loclist, opts)
+    vim.keymap.set('n', "<leader>rs", ":LspRestart<CR>", opts)
+    -- vim.keymap.set('n', "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
+    -- vim.keymap.set('n', "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
+    -- vim.keymap.set('n', "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
+    -- vim.keymap.set('n', "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
+    -- vim.keymap.set('n', "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
+    -- vim.keymap.set('n', "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
+    -- vim.keymap.set('n', "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
+    -- vim.keymap.set('n', "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
+    -- vim.keymap.set('n', "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
+    -- vim.keymap.set('n', "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
 end
 
 function plugin.config()

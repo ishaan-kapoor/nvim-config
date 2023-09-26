@@ -5,8 +5,6 @@ local plugin = {
         { "nvim-tree/nvim-web-devicons", lazy=true },
     },
     event = "VeryLazy",
-    -- lazy = true,
-    priority = 100,
     -- config = true
 }
 
@@ -130,6 +128,8 @@ end
 local bottom_section_sepatators = { left = "", right = "" }
 local top_section_sepatators = { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
+local mid_component_sepatators = { left = '', right = '' }
+local mid_section_sepatators = { left = '', right = '' }
 local pipeSeparators = { left = "|", right = "|" }
 local bottom_component_sepatators = { left = "", right = "" }
 local top_component_sepatators = { left = "", right = "" }
@@ -138,15 +138,12 @@ plugin.opts = {
     options = {
         icons_enabled = true,
         theme = 'auto',
-        -- component_separators = { left = '', right = ''},
-        -- section_separators = { left = '', right = ''},
         section_separators = bottom_section_sepatators,
         component_separators = emptySeparators,
         disabled_filetypes = {
             statusline = {"NvimTree"},
             winbar = {},
         },
-        -- ignore_focus = {},
         ignore_focus = {
             "DressingInput",
             "DressingSelect",
@@ -188,21 +185,28 @@ plugin.opts = {
     },
     inactive_sections = {},
     tabline = {
-        lualine_a = { { "buffers", section_separators = top_section_sepatators, component_separators = emptySeparators } },
+        lualine_a = {{ "buffers", section_separators = top_section_sepatators, component_separators = emptySeparators }},
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
-        lualine_y = { { "windows", section_separators = top_section_sepatators, component_separators = emptySeparators } },
-        lualine_z = { { "tabs", section_separators = top_section_sepatators, component_separators = emptySeparators } },
+        lualine_y = {{ "windows", section_separators = top_section_sepatators, component_separators = emptySeparators }},
+        lualine_z = {{ "tabs", section_separators = top_section_sepatators, component_separators = emptySeparators }},
     },
-    winbar = {},
-    inactive_winbar = {
+    winbar = {
         lualine_a = {},
-        lualine_b = {{ "filename", path=1, file_status=true }},
+        lualine_b = {{ "filename", path=1, file_status=true, section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
         lualine_c = {},
         lualine_x = {},
-        lualine_y = { "filesize" },
-        lualine_z = { "location" }
+        lualine_y = {},
+        lualine_z = {{ "filesize", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+    },
+    inactive_winbar = {
+        lualine_a = {},
+        lualine_b = {{ "filename", path=1, file_status=true, section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {{ "filesize", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        lualine_z = {{ "location", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
     },
     extensions = {},
 }

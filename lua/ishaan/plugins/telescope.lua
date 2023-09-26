@@ -27,9 +27,8 @@ local plugin = {
         { "<leader>ss", "<cmd>Telescope spell_suggest theme=cursor winblend=40<cr>", desc = "[S]uggest [S]pellings" },
         { "<leader>f<leader>c", "<cmd>Telescope colorscheme enable_preview=true<cr>", desc = "Switch Colorschemes" },
         { "<leader>f<leader>t", "<cmd>Telescope filetypes theme=dropdown<cr>", desc = "Change Filetype" },
-        -- leader
     },
-    -- event = "VeryLazy",
+    event = "VeryLazy",
 }
 
 function EDIT_NVIMRC()

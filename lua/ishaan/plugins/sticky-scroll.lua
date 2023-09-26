@@ -7,7 +7,7 @@ local plugin = {
         { "<F9>", "<cmd>TSContextToggle<CR>", mode = { 'i', 'n' }, desc = "Toggle Treesitter context" },
         { "[s", "<cmd>TSContextToggle<CR>", mode = { 'i', 'n' }, desc = "Toggle Treesitter context" },
         { "[c",function() require("treesitter-context").go_to_context() end, silent = true, desc = "Debug Telescope" },
-    }
+    },
 }
 
 function plugin.config()

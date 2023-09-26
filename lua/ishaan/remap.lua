@@ -10,6 +10,8 @@ vim.keymap.set('v', "<leader>s", ":sort<CR>", { desc = "sort selected lines" })
 
 vim.keymap.set('v', ">", ">gv", { desc = "Indent selected text without loosing indentation" })
 vim.keymap.set('v', "<", "<gv", { desc = "Indent selected text without loosing indentation" })
+vim.keymap.set('v', "<TAB>", ">gv", { desc = "Indent selected text without loosing indentation" })
+vim.keymap.set('v', "<S-TAB>", "<gv", { desc = "Indent selected text without loosing indentation" })
 vim.keymap.set('v', "<bs>", "d", { desc = "delete selection with backspace" })
 
 -- vim.keymap.set('n', "<C-j>", "ddp")
