@@ -6,7 +6,7 @@ local plugin = {
         -- "hrsh7th/cmp-nvim-lsp",
         -- { "antosha417/nvim-lsp-file-operations", config = true },
         -- "nvim-telescope/telescope.nvim",
-        "ray-x/lsp_signature.nvim",
+        -- "ray-x/lsp_signature.nvim",
     },
     priority = 100,
     -- ft = { "c", "cpp", "python", "lua", "rust" },
@@ -16,17 +16,15 @@ vim.lsp.set_log_level("off")
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
-    -- keybind options
-    local opts = { noremap = true, silent = true, buffer = bufnr }
     local telescope = require("telescope.builtin")
-    require("lsp_signature").on_attach({
-        bind = true,
-        toggle_key = '<M-x>',
-        floating_window = false,
-        select_signature_key = '<M-j>',
-        move_cursor_key = '<M-f>',
-        handler_opts = { border = "shadow" }
-    }, bufnr)
+    -- require("lsp_signature").on_attach({
+    --     bind = true,
+    --     toggle_key = '<M-x>',
+    --     floating_window = false,
+    --     select_signature_key = '<M-j>',
+    --     move_cursor_key = '<M-f>',
+    --     handler_opts = { border = "shadow" }
+    -- }, bufnr)
     print("LSP atached")
 
     vim.api.nvim_create_autocmd("CursorHold", {
@@ -40,31 +38,28 @@ local on_attach = function(client, bufnr)
     })
 
     -- set keybinds
-    -- vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', "gd", telescope.lsp_definitions, opts)
-    vim.keymap.set('n', "gD", vim.lsp.buf.declaration, opts) -- got to declaration
-    -- vim.keymap.set('n', "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', "gi", telescope.lsp_implementations, opts)
-    -- vim.keymap.set('n', "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set('n', "gr", telescope.lsp_references, opts)
-    -- vim.keymap.set('n', "gt", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', "gt", telescope.lsp_type_definitions, opts)
-    vim.keymap.set('n', "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', "<leader>ws", vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set('n', "<leader>vd", vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', "<leader>vD", telescope.diagnostics, opts)
-    vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set({'n',"v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', "<leader>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', "<leader>h", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
-    vim.keymap.set('n', "<leader>D", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', "<leader>l", vim.lsp.diagnostic.show_line_diagnostics, opts)
-    vim.keymap.set('n', "<leader>q", vim.lsp.diagnostic.set_loclist, opts)
-    vim.keymap.set('n', "<leader>rs", ":LspRestart<CR>", opts)
+    local opts = { noremap = true, silent = true, buffer = bufnr, desc = "LSP Keybinds"} -- keybind options
+    opts.desc = "Restart LSP"; vim.keymap.set('n', "<leader>lr", ":LspRestart<CR>", opts);
+    opts.desc = "Go to Definition"; vim.keymap.set('n', "gd", telescope.lsp_definitions, opts); -- vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
+    opts.desc = "Go to Declaration"; vim.keymap.set('n', "gD", vim.lsp.buf.declaration, opts);
+    opts.desc = "List Implementations"; vim.keymap.set('n', "gi", telescope.lsp_implementations, opts); -- vim.keymap.set('n', "gi", vim.lsp.buf.implementation, opts)
+    opts.desc = "List References"; vim.keymap.set('n', "gr", telescope.lsp_references, opts); -- vim.keymap.set('n', "gr", vim.lsp.buf.references, opts)
+    opts.desc = "Telescope type Definitions"; vim.keymap.set('n', "gt", telescope.lsp_type_definitions, opts); -- vim.keymap.set('n', "gt", vim.lsp.buf.type_definition, opts)
+    opts.desc = "LSP Hover"; vim.keymap.set('n', "K", vim.lsp.buf.hover, opts);
+    opts.desc = "LSP Workspace Symbol"; vim.keymap.set('n', "<leader>ws", vim.lsp.buf.workspace_symbol, opts);
+    -- opts.desc = "Open Diagnostic Float"; vim.keymap.set('n', "<leader>vd", vim.diagnostic.open_float, opts); -- autocommand executed on cursor hold
+    -- opts.desc = "Telescope Diagnostics"; vim.keymap.set('n', "<leader>vD", telescope.diagnostics, opts) -- <leader>fd in Telescope
+    opts.desc = "next Diagnostic"; vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts);
+    opts.desc = "prev Diagnostic"; vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, opts);
+    opts.desc = "LSP Code Action"; vim.keymap.set({'n',"v"}, "<leader>ca", vim.lsp.buf.code_action, opts);
+    opts.desc = "LSP Rename in all files"; vim.keymap.set('n', "<leader>rn", vim.lsp.buf.rename, opts);
+    opts.desc = "Signature help"; vim.keymap.set('n', "<leader>h", vim.lsp.buf.signature_help, opts);
+    opts.desc = "Add Workspace Folder"; vim.keymap.set('n', "<leader>wa", vim.lsp.buf.add_workspace_folder, opts);
+    opts.desc = "Remove Workspace folder"; vim.keymap.set('n', "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts);
+    opts.desc = "List workspace Folder"; vim.keymap.set('n', "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts);
+    -- opts.desc = "Go to type Definition"; vim.keymap.set('n', "<leader>D", vim.lsp.buf.type_definition, opts)
+    -- opts.desc = "Show line diagnostics"; vim.keymap.set('n', "<leader>l", vim.lsp.diagnostic.show_line_diagnostics, opts)
+    -- opts.desc = "Set Loclist"; vim.keymap.set('n', "<leader>q", vim.lsp.diagnostic.set_loclist, opts)
     -- vim.keymap.set('n', "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
     -- vim.keymap.set('n', "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
     -- vim.keymap.set('n', "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions

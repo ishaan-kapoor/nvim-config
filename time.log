@@ -796,3 +796,171 @@ times in msec
 003.095  001.481: expanding arguments
 003.182  000.088: inits 2
 003.687  000.505: init highlight
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.008  000.008: --- NVIM STARTING ---
+000.330  000.322: event init
+000.443  000.113: early init
+000.646  000.203: locale set
+000.712  000.066: init first window
+001.049  000.338: inits 1
+001.065  000.016: window checked
+001.068  000.003: parsing arguments
+001.696  000.050  000.050: require('vim.shared')
+001.823  000.053  000.053: require('vim.inspect')
+001.889  000.048  000.048: require('vim._options')
+001.891  000.190  000.090: require('vim._editor')
+001.893  000.332  000.091: require('vim._init_packages')
+001.896  000.496: init lua interpreter
+002.106  000.210: expanding arguments
+002.132  000.026: inits 2
+002.537  000.405: init highlight
+002.539  000.002: waiting for UI
+002.721  000.182: done waiting for UI
+002.736  000.016: clear screen
+002.762  000.013  000.013: require('vim.keymap')
+003.042  000.293: init default mappings & autocommands
+003.578  000.100  000.100: sourcing /usr/local/share/nvim/runtime/ftplugin.vim
+003.674  000.048  000.048: sourcing /usr/local/share/nvim/runtime/indent.vim
+004.016  000.183  000.183: require('ishaan.tools')
+008.064  000.270  000.270: require('vim.lsp.log')
+009.434  001.363  001.363: require('vim.lsp.protocol')
+012.564  000.494  000.494: require('vim.lsp._snippet')
+012.729  000.157  000.157: require('vim.highlight')
+012.745  000.009  000.009: require('vim.F')
+012.773  003.331  002.671: require('vim.lsp.util')
+012.795  005.750  000.787: require('vim.lsp.handlers')
+013.620  000.821  000.821: require('vim.lsp.rpc')
+013.990  000.361  000.361: require('vim.lsp.sync')
+014.879  000.883  000.883: require('vim.lsp.semantic_tokens')
+015.826  000.932  000.932: require('vim.lsp.buf')
+016.306  000.472  000.472: require('vim.lsp.diagnostic')
+016.710  000.398  000.398: require('vim.lsp.codelens')
+016.821  011.904  002.286: require('vim.lsp')
+016.991  012.971  001.067: require('ishaan.set')
+020.393  003.396  003.396: require('ishaan.remap')
+020.533  000.131  000.131: require('ishaan.vimscript')
+021.717  000.850  000.850: require('lazy')
+021.804  000.048  000.048: require('ffi')
+022.146  000.239  000.239: require('vim.uri')
+022.181  000.368  000.129: require('vim.loader')
+022.316  000.065  000.065: require('vim.fs')
+022.579  000.366  000.301: require('lazy.stats')
+022.880  000.255  000.255: require('lazy.core.util')
+023.273  000.386  000.386: require('lazy.core.config')
+024.804  001.168  001.168: require('lazy.core.handler')
+025.063  000.249  000.249: require('lazy.core.plugin')
+025.080  001.798  000.381: require('lazy.core.loader')
+026.021  000.189  000.189: require('ishaan.plugins')
+026.294  000.229  000.229: require('ishaan.plugins.colorscheme')
+026.548  000.223  000.223: require('ishaan.plugins.comments')
+026.798  000.218  000.218: require('ishaan.plugins.completion')
+027.064  000.162  000.162: require('ishaan.plugins.copilot')
+027.241  000.141  000.141: require('ishaan.plugins.debugger')
+027.732  000.446  000.446: require('ishaan.plugins.debugger-cpp')
+028.097  000.313  000.313: require('ishaan.plugins.debugger-python')
+028.447  000.301  000.301: require('ishaan.plugins.dressing')
+028.664  000.184  000.184: require('ishaan.plugins.fold')
+028.823  000.112  000.112: require('ishaan.plugins.illuminate')
+028.991  000.138  000.138: require('ishaan.plugins.indent-blankline')
+029.214  000.199  000.199: require('ishaan.plugins.lspconfig')
+029.466  000.178  000.178: require('ishaan.plugins.lualine')
+029.607  000.097  000.097: require('ishaan.plugins.mason')
+030.495  000.139  000.139: require('ishaan.plugins.maximizer')
+030.636  000.112  000.112: require('ishaan.plugins.noice')
+031.017  000.331  000.331: require('ishaan.plugins.nvim-tree')
+031.196  000.135  000.135: require('ishaan.plugins.sticky-scroll')
+031.387  000.164  000.164: require('ishaan.plugins.surround')
+031.512  000.097  000.097: require('ishaan.plugins.tagbar')
+031.952  000.420  000.420: require('ishaan.plugins.telescope')
+032.246  000.168  000.168: require('ishaan.plugins.treesitter')
+032.604  000.333  000.333: require('ishaan.plugins.treesitter-textobjects')
+034.203  000.181  000.181: require('ishaan.plugins.undotree')
+034.610  000.371  000.371: require('ishaan.plugins.vim-tmux-navigator')
+034.776  000.127  000.127: require('ishaan.plugins.wakatime')
+034.902  000.101  000.101: require('ishaan.plugins.whichkey')
+036.600  000.199  000.199: require('lazy.core.handler.cmd')
+036.768  000.153  000.153: require('lazy.core.handler.event')
+036.907  000.129  000.129: require('lazy.core.handler.keys')
+037.033  000.117  000.117: require('lazy.core.handler.ft')
+042.406  000.716  000.716: sourcing /usr/local/share/nvim/runtime/filetype.lua
+044.157  001.247  001.247: require('gruvbox')
+052.135  000.260  000.260: require('vim.version')
+058.521  001.513  001.513: require('gruvbox.groups')
+059.434  000.895  000.895: require('gruvbox.palette')
+063.518  011.806  009.138: sourcing /home/ishaan/.local/share/nvim/lazy/gruvbox.nvim/colors/gruvbox.lua
+066.394  002.532  002.532: sourcing /home/ishaan/.local/share/nvim/lazy/nvim-lspconfig/plugin/lspconfig.lua
+069.073  000.556  000.556: require('lspconfig.util')
+069.287  000.201  000.201: require('lspconfig.async')
+069.298  001.128  000.371: require('lspconfig.configs')
+069.304  002.822  001.694: require('lspconfig')
+070.513  000.509  000.509: require('cmp_nvim_lsp.source')
+070.527  001.219  000.710: require('cmp_nvim_lsp')
+070.876  000.261  000.261: require('lspconfig.server_configurations.clangd')
+073.976  000.355  000.355: require('lspconfig.manager')
+074.181  000.173  000.173: require('lspconfig.server_configurations.pyright')
+075.660  000.585  000.585: require('lspconfig.server_configurations.bashls')
+076.704  000.265  000.265: require('lspconfig.server_configurations.hls')
+077.646  000.475  000.475: require('lspconfig.server_configurations.rust_analyzer')
+079.961  000.165  000.165: require('lspconfig.server_configurations.lua_ls')
+080.826  000.153  000.153: sourcing /usr/local/share/nvim/runtime/plugin/editorconfig.lua
+081.432  000.463  000.463: sourcing /usr/local/share/nvim/runtime/plugin/gzip.vim
+081.685  000.172  000.172: sourcing /usr/local/share/nvim/runtime/plugin/man.lua
+082.778  000.643  000.643: sourcing /usr/local/share/nvim/runtime/pack/dist/opt/matchit/plugin/matchit.vim
+082.835  001.051  000.408: sourcing /usr/local/share/nvim/runtime/plugin/matchit.vim
+083.279  000.378  000.378: sourcing /usr/local/share/nvim/runtime/plugin/matchparen.vim
+084.180  000.838  000.838: sourcing /usr/local/share/nvim/runtime/plugin/netrwPlugin.vim
+084.518  000.255  000.255: sourcing /usr/local/share/nvim/runtime/plugin/nvim.lua
+084.943  000.021  000.021: sourcing /home/ishaan/.local/share/nvim/rplugin.vim
+084.964  000.367  000.346: sourcing /usr/local/share/nvim/runtime/plugin/rplugin.vim
+085.176  000.148  000.148: sourcing /usr/local/share/nvim/runtime/plugin/shada.vim
+085.305  000.058  000.058: sourcing /usr/local/share/nvim/runtime/plugin/spellfile.vim
+085.632  000.261  000.261: sourcing /usr/local/share/nvim/runtime/plugin/tarPlugin.vim
+085.914  000.212  000.212: sourcing /usr/local/share/nvim/runtime/plugin/tohtml.vim
+086.023  000.045  000.045: sourcing /usr/local/share/nvim/runtime/plugin/tutor.vim
+086.443  000.360  000.360: sourcing /usr/local/share/nvim/runtime/plugin/zipPlugin.vim
+086.818  000.135  000.135: sourcing /home/ishaan/.local/share/nvim/lazy/cmp-nvim-lsp/after/plugin/cmp_nvim_lsp.lua
+087.043  066.505  028.511: require('ishaan.lazy')
+087.108  083.352  000.168: require('ishaan')
+087.115  083.384  000.032: sourcing /home/ishaan/.config/nvim/init.lua
+087.137  000.563: sourcing vimrc file(s)
+087.641  000.176  000.176: sourcing /usr/local/share/nvim/runtime/filetype.lua
+088.418  000.341  000.341: sourcing /usr/local/share/nvim/runtime/syntax/synload.vim
+088.670  000.833  000.492: sourcing /usr/local/share/nvim/runtime/syntax/syntax.vim
+088.714  000.569: inits 3
+096.167  007.453: reading ShaDa
+096.643  000.475: opening buffers
+096.717  000.075: BufEnter autocommands
+096.724  000.007: editing files in windows
+096.916  000.192: VimEnter autocommands
+097.020  000.104: UIEnter autocommands
+097.026  000.006: before starting main loop
+097.622  000.596: first screen update
+097.631  000.009: --- NVIM STARTED ---
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.021  000.021: --- NVIM STARTING ---
+000.410  000.388: event init
+000.523  000.114: early init
+000.727  000.204: locale set
+000.804  000.077: init first window
+001.164  000.360: inits 1
+001.176  000.011: window checked
+001.179  000.003: parsing arguments
+001.824  000.055  000.055: require('vim.shared')
+001.963  000.059  000.059: require('vim.inspect')
+002.033  000.053  000.053: require('vim._options')
+002.035  000.203  000.092: require('vim._editor')
+002.037  000.358  000.100: require('vim._init_packages')
+002.040  000.503: init lua interpreter
+003.026  000.986: expanding arguments
+003.066  000.039: inits 2
+003.544  000.479: init highlight

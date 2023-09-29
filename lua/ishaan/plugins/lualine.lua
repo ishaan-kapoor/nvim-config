@@ -27,21 +27,6 @@ local function noice_command_status()
     -- return true
 end
 
-local function lsp_progress()
-    local messages = vim.lsp.util.get_progress_messages()
-    if #messages == 0 then
-        return
-    end
-    local status = {}
-    for _, msg in pairs(messages) do
-        table.insert(status, (msg.percentage or 0) .. "%% " .. (msg.title or ""))
-    end
-    local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-    local ms = vim.loop.hrtime() / 1000000
-    local frame = math.floor(ms / 120) % #spinners
-    return table.concat(status, " | ") .. " " .. spinners[frame + 1]
-end
-
 -- displays irregular indentation and linebreaks, displays nothing when all is good
 -- selene: allow(high_cyclomatic_complexity)
 local function irregularWhitespace()
@@ -119,7 +104,7 @@ local function cwd()
 end
 
 local function lspServers()
-    local buf_clients = vim.lsp.buf_get_clients()
+    local buf_clients = vim.lsp.get_clients({bufnr=0})
     local buf_client_names = {}
     for _, client in pairs(buf_clients) do table.insert(buf_client_names, client.name) end
     return table.concat(buf_client_names, '|')
@@ -138,7 +123,8 @@ plugin.opts = {
     options = {
         icons_enabled = true,
         theme = 'auto',
-        section_separators = bottom_section_sepatators,
+        -- section_separators = bottom_section_sepatators,
+        section_separators = emptySeparators,
         component_separators = emptySeparators,
         disabled_filetypes = {
             statusline = {"NvimTree"},
@@ -170,10 +156,10 @@ plugin.opts = {
         lualine_c = {
             { "Current Working Directory", fmt=cwd },
             { "last executed command", fmt=noice_command, cond = noice_command_status, color = { fg = "#ff9e64" } },
-            {"lsp progress", fmt = lsp_progress}
         },
         lualine_x = {
-            { "filetype", component_separators = bottom_component_sepatators },
+            -- { "filetype", component_separators = bottom_component_sepatators },
+            { "filetype", component_separators = pipeSeparators },
             { irregularWhitespace }
         },
         lualine_y = {
@@ -185,32 +171,26 @@ plugin.opts = {
     },
     inactive_sections = {},
     tabline = {
-        lualine_a = {{ "buffers", section_separators = top_section_sepatators, component_separators = emptySeparators }},
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {{ "windows", section_separators = top_section_sepatators, component_separators = emptySeparators }},
-        lualine_z = {{ "tabs", section_separators = top_section_sepatators, component_separators = emptySeparators }},
+        lualine_a = { "buffers" },
+        -- lualine_a = {{ "buffers", section_separators = top_section_sepatators, component_separators = emptySeparators }},
+        -- lualine_y = {{ "windows", section_separators = top_section_sepatators, component_separators = emptySeparators }},
+        -- lualine_z = {{ "tabs", section_separators = top_section_sepatators, component_separators = emptySeparators }},
+        lualine_z = { "tabs" },
     },
     winbar = {
-        lualine_a = {},
-        lualine_b = {{ "filename", path=1, file_status=true, section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {{ "filesize", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        -- lualine_b = {{ "filename", path=1, file_status=true, section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        lualine_b = {{ "filename", path=1, file_status=true }},
     },
     inactive_winbar = {
-        lualine_a = {},
-        lualine_b = {{ "filename", path=1, file_status=true, section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {{ "filesize", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
-        lualine_z = {{ "location", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        -- lualine_b = {{ "filename", path=1, file_status=true, section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        -- lualine_y = {{ "filesize", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        -- lualine_z = {{ "location", section_separators = mid_section_sepatators, component_separators = mid_component_sepatators }},
+        lualine_b = {{ "filename", path=1, file_status=true }},
+        lualine_y = { "filesize" },
+        lualine_z = { "location" },
     },
     extensions = {},
 }
-
 
 function plugin.config()
     local lualine = require("lualine")
@@ -224,7 +204,7 @@ function plugin.config()
 
     vim.api.nvim_create_autocmd("RecordingLeave", {
         callback = function()
-            local timer = vim.loop.new_timer()
+            local timer = vim.uv.new_timer()
             timer:start(
                 50, 0,
                 vim.schedule_wrap(function()

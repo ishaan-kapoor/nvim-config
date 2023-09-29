@@ -17,6 +17,8 @@ function plugin.config()
         show_current_context = true,
         show_current_context_start = true,
         space_char_blankline = " ",
+        show_end_of_line = true,
+        indent_blankline_show_current_context_start_on_current_line = false,
         char_highlight_list = {
             "IndentBlanklineIndent1",
             "IndentBlanklineIndent2",

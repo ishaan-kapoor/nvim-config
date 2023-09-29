@@ -2,7 +2,7 @@ local plugin = {
 	"nvim-tree/nvim-tree.lua",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = {
-		{ "<C-E>", "<Esc>:NvimTreeToggle<CR>", mode = 'i', desc = "Toggle tree" },
+		-- { "<C-E>", "<Esc>:NvimTreeToggle<CR>", mode = 'i', desc = "Toggle tree" },
         { "<leader>ex", ":NvimTreeFindFileToggle<CR>", desc = "Toggle file explorer" },
         { "<leader>ee", ":NvimTreeFocus<CR>", desc = "Focus file explorer" },
         { "<leader>ec", "<cmd>NvimTreeCollapse<CR>", desc = "Collapse file explorer" },

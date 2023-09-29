@@ -35,16 +35,71 @@ function EDIT_NVIMRC()
     require("plenary.reload").reload_module("telescope")
     require("telescope.builtin").find_files(require('telescope.themes').get_dropdown({
         prompt_title = "~ nvimrc ~",
-        cwd = "~/.config/nvim/lua/ishaan",
+        cwd = "~/.config/nvim",
         shorten_path = true,
         no_ignore = true,
         no_parent_ignore = true,
         layout_strategy = "horizontal",
-        -- layout_config = {
-        --     preview_width = 0.65,
-        -- },
         height = 10,
     }))
+end
+
+
+function LoadSession()
+    local actions = require "telescope.actions"
+    local snippet_dir = "~/.config/nvim/sessions/"
+
+    local opts = require("telescope.themes").get_dropdown{
+        prompt_title = "~ Saved Sessions ~",
+        cwd = snippet_dir,
+        shorten_path = true,
+        no_ignore = true,
+        no_parent_ignore = true,
+        layout_strategy = "horizontal",
+        height = 10,
+    }
+    opts.attach_mappings = function(prompt_bufnr, map)
+        actions.select_default:replace(function()
+            actions.close(prompt_bufnr)
+            vim.cmd("source " .. snippet_dir .. require("telescope.actions.state").get_selected_entry().value)
+        end)
+        return true
+    end
+    require("telescope.builtin").find_files(opts)
+end
+
+function ColorschemeChange(transparent)
+    local pickers = require "telescope.pickers"
+    local finders = require "telescope.finders"
+    local conf = require("telescope.config").values
+    local actions = require "telescope.actions"
+    local action_state = require "telescope.actions.state"
+
+    local opts = require("telescope.themes").get_dropdown{}
+    opts.transparent = transparent
+
+    pickers.new(opts, {
+        finder = finders.new_table { results = vim.fn.getcompletion("", "color") },
+        sorter = conf.generic_sorter(opts),
+        attach_mappings = function(prompt_bufnr, map)
+            actions.select_default:replace(function()
+                actions.close(prompt_bufnr)
+                ApplyColorScheme(action_state.get_selected_entry().value, opts)
+            end)
+
+            actions.move_selection_next:enhance {
+                post = function()
+                    ApplyColorScheme(action_state.get_selected_entry().value, opts)
+                end,
+            }
+            actions.move_selection_previous:enhance {
+                post = function()
+                    ApplyColorScheme(action_state.get_selected_entry().value, opts)
+                end,
+            }
+            return true
+        end,
+    }):find()
 end
 
 function plugin.config()

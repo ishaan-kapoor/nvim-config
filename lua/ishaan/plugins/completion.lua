@@ -1,19 +1,20 @@
 local plugin = {
-    'hrsh7th/nvim-cmp',
-    event = { 'InsertEnter' },
+    "hrsh7th/nvim-cmp",
+    event = { "InsertEnter" },
     -- event = { 'VeryLazy', 'InsertEnter' },
     dependencies = {
-        'hrsh7th/cmp-buffer', -- buffer completions
-        'hrsh7th/cmp-path', -- path completions
-        'saadparwaiz1/cmp_luasnip',  -- snippet completion
-        'rafamadriz/friendly-snippets',  -- VSCode like snippets
-        'L3MON4D3/LuaSnip', -- snippet engine
-        'hrsh7th/cmp-nvim-lua',  -- nvim lua completions
-        'hrsh7th/cmp-nvim-lsp',  -- nvim lsp completions
-        'neovim/nvim-lspconfig',  -- lsp config
-        'nvim-lua/plenary.nvim',  -- lua utils
-        'williamboman/mason-lspconfig.nvim', -- mason-lspconfig
-        'williamboman/mason.nvim',
+        "hrsh7th/cmp-buffer", -- buffer completions
+        "hrsh7th/cmp-path", -- path completions
+        "saadparwaiz1/cmp_luasnip",  -- snippet completion
+        "rafamadriz/friendly-snippets",  -- VSCode like snippets
+        "L3MON4D3/LuaSnip", -- snippet engine
+        "hrsh7th/cmp-nvim-lua",  -- nvim lua completions
+        "hrsh7th/cmp-nvim-lsp",  -- nvim lsp completions
+        "neovim/nvim-lspconfig",  -- lsp config
+        "nvim-lua/plenary.nvim",  -- lua utils
+        "williamboman/mason-lspconfig.nvim", -- mason-lspconfig
+        "williamboman/mason.nvim",
+        "hrsh7th/cmp-nvim-lsp-signature-help",
         -- 'jose-elias-alvarez/null-ls.nvim',
     }
 }
@@ -122,6 +123,7 @@ function plugin.config()
             end,
         },
         sources = {
+            { name = "nvim_lsp_signature_help" },
             { name = "nvim_lsp" },
             { name = "nvim_lua" },
             { name = "luasnip" },

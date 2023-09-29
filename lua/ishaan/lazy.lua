@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
     -- { 'mg979/vim-visual-multi', { branch = 'master' } },
     -- 'mattn/emmet-vim',
+    -- 'Rasukarusan/nvim-select-multi-line',
     -- 'notomo/gesture.nvim',
     -- 'lervag/vimtex',
     -- 'sirver/ultisnips',
