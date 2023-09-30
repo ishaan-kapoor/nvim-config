@@ -1,6 +1,6 @@
 local plugin = {
     "RRethy/vim-illuminate",
-    opt = { large_file_cutoff = 1000 },
+    lazy = { large_file_cutoff = 1000 },
     -- event = { "VeryLazy", "BufRead" },
     event = "VeryLazy",
 }
