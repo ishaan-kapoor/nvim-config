@@ -21,6 +21,10 @@ local plugins = {
     -- 'mhinz/neovim-remote',
     -- 'dylanaraps/wal.vim',
     -- 'jpalardy/vim-slime',
+    -- 'monaqa/dial.nvim',
+    -- 'sindrets/winshift.nvim',
+    -- 'anuvyklack/hydra.nvim',
+    -- 'TaDaa/vimade',
 }
 
 local opts = {
