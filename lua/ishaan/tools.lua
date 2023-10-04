@@ -17,8 +17,6 @@ end
 
 function RunCPCode()
     vim.cmd(":up")
-    -- local buf = vim.api.nvim_get_current_buf()
-    -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
     local ft = vim.bo.filetype
     if ft == "python" then
         vim.cmd("!python3 % < input.txt &> output.txt")
@@ -33,18 +31,27 @@ function RunCPCode()
     end
 end
 
-function RunCode()
+function Compile()
     vim.cmd(":up")
+    -- local buf = vim.api.nvim_get_current_buf()
+    -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+    local ft = vim.bo.filetype
+    if ft == "cpp" then
+        vim.cmd("!g++ % -o %<")
+    elseif ft == "c" then
+        vim.cmd("!gcc % -o %<")
+    elseif ft == "rust" then
+        vim.cmd("!rustc % -o %<")
+    end
+end
+
+function RunCode()
+    Compile()
     local ft = vim.bo.filetype
     if ft == "python" then
         vim.cmd("!python3 %")
-    elseif ft == "cpp" then
-        vim.cmd("!g++ % -o %<")
+    elseif ((ft == "cpp") or (ft == "c")) or (ft == "rust") then
         vim.cmd("! ./%<")
-    elseif ft == "c" then
-        vim.cmd("!gcc % -o %< && ./%<")
-    elseif ft == "rust" then
-        vim.cmd("!rustc % -o %< && ./%<")
     end
 end
 
@@ -136,3 +143,63 @@ end
 function WriteSudo()
     vim.cmd("w !sudo tee % > /dev/null")
 end
+
+
+-- displays irregular indentation and linebreaks, displays nothing when all is good
+-- selene: allow(high_cyclomatic_complexity)
+function IrregularWhitespace()
+    -- USER CONFIG
+    -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
+    local spaceFiletypes = { python = 4, lua = 4, c = 4, cpp = 4, rust = 4, javascript = 2, typescript = 2, bash = 2 }
+    local ignoredFiletypes = { "css", "markdown", "gitcommit" }
+    local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
+
+    -- vars & guard
+    local usesSpaces = vim.bo.expandtab
+    local usesTabs = not vim.bo.expandtab
+    local brUsed = vim.bo.fileformat
+    local ft = vim.bo.filetype
+    local width = vim.bo.tabstop
+    if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then return "" end
+
+    -- non-default indentation setting (e.g. changed via indent-o-matic)
+    local nonDefaultSetting = ""
+    local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
+    if
+        (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
+        or (usesSpaces and width ~= spaceFiletypes[ft])
+    then
+        nonDefaultSetting = " " .. tostring(width) .. " 󱁐 "
+    elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
+        nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
+    end
+
+    -- wrong or mixed indentation
+    local hasTabs = vim.fn.search("^\t", "nw") > 0
+    local hasSpaces = vim.fn.search("^ ", "nw") > 0
+    -- exception, jsdocs: space not followed by "*"
+    if vim.bo.filetype == "javascript" then hasSpaces = vim.fn.search([[^ \(\*\)\@!]], "nw") > 0 end
+    local wrongIndent = ""
+    if usesTabs and hasSpaces then
+        wrongIndent = " 󱁐 "
+    elseif usesSpaces and hasTabs then
+        wrongIndent = " 󰌒 "
+    elseif hasTabs and hasSpaces then
+        wrongIndent = " 󱁐 + 󰌒 "
+    end
+
+    -- line breaks
+    local linebreakIcon = ""
+    if brUsed ~= linebreakType then
+        if brUsed == "unix" then
+            linebreakIcon = " 󰌑 "
+        elseif brUsed == "mac" then
+            linebreakIcon = " 󰌑 "
+        elseif brUsed == "dos" then
+            linebreakIcon = " 󰌑 "
+        end
+    end
+
+    return nonDefaultSetting .. wrongIndent .. linebreakIcon
+end
+

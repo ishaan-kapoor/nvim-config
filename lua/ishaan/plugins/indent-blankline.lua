@@ -1,4 +1,3 @@
-
 local plugin = {
     "lukas-reineke/indent-blankline.nvim",
     event = "VeryLazy",

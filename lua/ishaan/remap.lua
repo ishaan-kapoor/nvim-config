@@ -94,9 +94,7 @@ vim.keymap.set('n', "<C-s>", "<Cmd> up <CR>", { desc = "Save Buffer" })
 
 vim.keymap.set('n', "<leader>lp", "<Cmd> Lazy <CR>", { desc = "Lazy Profile" })
 
-vim.keymap.set({'n','i'}, "<F3>", '<Cmd> up <CR> <Cmd> !rustc "%" && "./%<" <CR>', { desc = "Compile and run rust program" })
-vim.keymap.set({'n','i'}, "<F4>", '<Cmd> up <CR> <Cmd> !g++ -o "%<" "%" && "./%<" <CR>', { desc = "Compile and run C++ program" })
-vim.keymap.set({'n','i'}, "<F5>", "<Cmd> up <CR> <Cmd> !python3 <CR>", { desc = "Run Python File" })
+vim.keymap.set({'n','i'}, "<F3>", Compile, { desc = "Compile the program" })
 vim.keymap.set({'n','i'}, "<F6>", "<Cmd> up <CR> <Cmd> !./% <CR>", { desc = "Run Executable File" })
 
 vim.keymap.set('n', "<M-/>", RunCode, {noremap = true, desc = "Run the Code"})

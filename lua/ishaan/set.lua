@@ -25,7 +25,7 @@ vim.opt.scrolloff = 2
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = {"80", "120"}
 vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
+vim.opt.cursorcolumn = false
 vim.opt.laststatus = 3
 
 vim.opt.termguicolors = true

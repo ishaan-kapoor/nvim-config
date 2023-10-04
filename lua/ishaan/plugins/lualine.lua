@@ -27,66 +27,6 @@ local function noice_command_status()
     -- return true
 end
 
--- displays irregular indentation and linebreaks, displays nothing when all is good
--- selene: allow(high_cyclomatic_complexity)
-local function irregularWhitespace()
-    -- USER CONFIG
-    -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-    local spaceFiletypes = { python = 4, lua = 4 }
-    local ignoredFiletypes = { "css", "markdown", "gitcommit" }
-    local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
-
-    -- vars & guard
-    local usesSpaces = vim.bo.expandtab
-    local usesTabs = not vim.bo.expandtab
-    local brUsed = vim.bo.fileformat
-    local ft = vim.bo.filetype
-    local width = vim.bo.tabstop
-    if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then return "" end
-
-    -- non-default indentation setting (e.g. changed via indent-o-matic)
-    local nonDefaultSetting = ""
-    local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-    if
-        (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
-        or (usesSpaces and width ~= spaceFiletypes[ft])
-    then
-        nonDefaultSetting = " " .. tostring(width) .. " 󱁐 "
-    elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-        nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
-    end
-
-    -- wrong or mixed indentation
-    local hasTabs = vim.fn.search("^\t", "nw") > 0
-    local hasSpaces = vim.fn.search("^ ", "nw") > 0
-    -- exception, jsdocs: space not followed by "*"
-    if vim.bo.filetype == "javascript" then hasSpaces = vim.fn.search([[^ \(\*\)\@!]], "nw") > 0 end
-    local wrongIndent = ""
-    if usesTabs and hasSpaces then
-        wrongIndent = " 󱁐 "
-    elseif usesSpaces and hasTabs then
-        wrongIndent = " 󰌒 "
-    elseif hasTabs and hasSpaces then
-        wrongIndent = " 󱁐 + 󰌒 "
-    end
-
-    -- line breaks
-    local linebreakIcon = ""
-    if brUsed ~= linebreakType then
-        if brUsed == "unix" then
-            linebreakIcon = " 󰌑 "
-        elseif brUsed == "mac" then
-            linebreakIcon = " 󰌑 "
-        elseif brUsed == "dos" then
-            linebreakIcon = " 󰌑 "
-        end
-    end
-
-    return nonDefaultSetting .. wrongIndent .. linebreakIcon
-end
-
---------------------------------------------------------------------------------
-
 -- only show the clock when fullscreen (= it covers the menubar clock)
 local function clock()
     if vim.opt.columns:get() < 150 or vim.opt.lines:get() < 51 then return "" end
@@ -122,7 +62,8 @@ local top_component_sepatators = { left = "", right = "" }
 plugin.opts = {
     options = {
         icons_enabled = true,
-        theme = 'auto',
+        theme = "tokyonight",
+        -- theme = 'auto',
         -- section_separators = bottom_section_sepatators,
         section_separators = emptySeparators,
         component_separators = emptySeparators,
@@ -160,7 +101,7 @@ plugin.opts = {
         lualine_x = {
             -- { "filetype", component_separators = bottom_component_sepatators },
             { "filetype", component_separators = pipeSeparators },
-            { irregularWhitespace }
+            { IrregularWhitespace }
         },
         lualine_y = {
             "progress",

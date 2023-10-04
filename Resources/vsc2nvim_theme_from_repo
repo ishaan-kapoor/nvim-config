@@ -14,19 +14,22 @@ dir=$(basename $(echo "$1" | sed 's/\.git$//')) || exit
 mv "$dir/themes" ./ || exit
 rm -rf "$dir"
 
+read -r -p "Enter theme name: " theme_name
+[ -n "$theme_name" ] && theme_name="-$theme_name"
+
+# read -p "Enter theme name (default :- $dir): " theme_name
+
 cd themes || exit
 rm ui-key-tester.json
 
 for i in *.json; do
     echo "Converting $i"
     set +e
+    sed -i "/\/\//d" "$i"
     (python3 -m json.tool "$i" | sponge "$i") && # install moreutils for sponge
     ../djanho -l "$i" &&
-    mv ./generated.lua ../../colors/${i%.json}.lua
+    mv ./generated.lua "../../colors/${i%.json}${theme_name}.lua"
     set -e
-    # python3 -m json.tool "$i" | sponge "$i" # install moreutils for sponge
-    # ../djanho -l "$i"
-    # mv ./generated.lua ../../colors/${i%.json}.lua
 done
 
 cd ../
