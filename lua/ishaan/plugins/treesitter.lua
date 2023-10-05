@@ -25,6 +25,15 @@ function plugin.config()
                 end
             end,
         },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "vv",
+                node_incremental = "vv",
+                node_decremental = "v-",
+                scope_incremental = "v+",
+            },
+        },
 })
 end
 
