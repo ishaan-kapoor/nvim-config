@@ -46,11 +46,12 @@ function Compile()
 end
 
 function RunCode()
-    Compile()
     local ft = vim.bo.filetype
     if ft == "python" then
+        vim.cmd(":up")
         vim.cmd("!python3 %")
     elseif ((ft == "cpp") or (ft == "c")) or (ft == "rust") then
+        Compile()
         vim.cmd("! ./%<")
     end
 end

@@ -12,7 +12,7 @@ vim.keymap.set('v', ">", ">gv", { desc = "Indent selected text without loosing i
 vim.keymap.set('v', "<", "<gv", { desc = "Indent selected text without loosing indentation" })
 vim.keymap.set('v', "<TAB>", ">gv", { desc = "Indent selected text without loosing indentation" })
 vim.keymap.set('v', "<S-TAB>", "<gv", { desc = "Indent selected text without loosing indentation" })
-vim.keymap.set('v', "<bs>", "d", { desc = "delete selection with backspace" })
+-- vim.keymap.set('v', "<bs>", "d", { desc = "delete selection with backspace" })
 
 -- vim.keymap.set('n', "<C-j>", "ddp")
 -- vim.keymap.set('n', "<C-k>", "ddkkp")
@@ -87,9 +87,9 @@ vim.keymap.set('n', "<leader>bx", "<Cmd> bd <CR>", { desc = "Delete Buffer" })
 vim.keymap.set('n', "<leader>br", "<Cmd> e <CR>", { desc = "Reload Buffer" })
 
 -- vim.keymap.set('n', "<leader>b", "^", { desc = "GoTo begining of Line" })
-vim.keymap.set('n', "<leader>r", "<C-r>", { desc = "Redo" })
-vim.keymap.set('n', "<C-a>", "ggVG", { desc = "Select All" })
-vim.keymap.set('n', "<C-s>", "<Cmd> up <CR>", { desc = "Save Buffer" })
+-- vim.keymap.set('n', "<leader>r", "<C-r>", { desc = "Redo" })
+-- vim.keymap.set('n', "<C-a>", "ggVG", { desc = "Select All" })
+-- vim.keymap.set('n', "<C-s>", "<Cmd> up <CR>", { desc = "Save Buffer" })
 -- vim.keymap.set('n', "<TAB>", "%", { desc = "Move start to end using tab" })
 
 vim.keymap.set('n', "<leader>lp", "<Cmd> Lazy <CR>", { desc = "Lazy Profile" })
@@ -98,3 +98,4 @@ vim.keymap.set({'n','i'}, "<F3>", Compile, { desc = "Compile the program" })
 vim.keymap.set({'n','i'}, "<F6>", "<Cmd> up <CR> <Cmd> !./% <CR>", { desc = "Run Executable File" })
 
 vim.keymap.set('n', "<M-/>", RunCode, {noremap = true, desc = "Run the Code"})
+vim.keymap.set('n', "<leader>ww", "<Cmd> set wrap! <CR>", { desc = "Toggle Word wrap" })
