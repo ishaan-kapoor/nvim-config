@@ -63,3 +63,15 @@ vim.g.loaded_ruby_provider = 0
 vim.g.node_host_prog = "/usr/local/bin/neovim-node-host"
 vim.g.python3_host_prog = "/usr/bin/python3"
 
+vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+        ['+'] = 'clip.exe',
+        ['*'] = 'clip.exe',
+    },
+    paste = {
+        ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+}

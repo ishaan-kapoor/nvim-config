@@ -6,7 +6,7 @@ vim.keymap.set('c', "kj", "<Esc><Esc>", { desc = "Escape from command mode" })
 vim.keymap.set('n', "<leader> ", vim.cmd.source, { desc = "Source Current file" } )
 vim.keymap.set('n', "<leader>o", "o<Esc>", { desc = "Insert new line below" })
 vim.keymap.set('n', "<leader>O", "O<Esc>", { desc = "Insert new line above" })
-vim.keymap.set('v', "<leader>s", ":sort<CR>", { desc = "sort selected lines" })
+vim.keymap.set('v', "<leader>srt", ":sort<CR>", { desc = "sort selected lines" })
 
 vim.keymap.set('v', ">", ">gv", { desc = "Indent selected text without loosing indentation" })
 vim.keymap.set('v', "<", "<gv", { desc = "Indent selected text without loosing indentation" })
@@ -51,7 +51,8 @@ vim.keymap.set('n', "<leader>+", "<C-a>", { noremap=true, desc = "Increment Numb
 vim.keymap.set('n', "<leader>-", "<C-x>", { desc = "Decrement Number Under Cursor" })
 
 -- Windows & Splits
-vim.keymap.set('n', "<leader>w", "<C-w>", { desc = "Window movement using leader key" })
+-- vim.keymap.set('n', "<leader>w", "<C-w>", { desc = "Window movement using leader key" })
+vim.keymap.set('n', "<leader>ww", "<C-w>w", { desc = "Switch to recent window" })
 vim.keymap.set('n', "<leader>wx", "<Cmd>close <CR>", { desc = "Close window" })
 vim.keymap.set('n', "<leader>wo", "<Cmd> only <CR>", { desc = "Close Other Windows" })
 vim.keymap.set('n', "<leader>wd", "<Cmd>close <CR>", { desc = "Close window" })
