@@ -5,6 +5,7 @@ local plugin = {
     dependencies = {
         "hrsh7th/cmp-buffer", -- buffer completions
         "hrsh7th/cmp-path", -- path completions
+        "hrsh7th/cmp-calc", -- math evaluation completions
         "saadparwaiz1/cmp_luasnip",  -- snippet completion
         "rafamadriz/friendly-snippets",  -- VSCode like snippets
         "L3MON4D3/LuaSnip", -- snippet engine
@@ -25,32 +26,34 @@ local check_backspace = function()
 end
 
 local kind_icons = {
-    Text = "󰉿",
-    Method = "󰆧",
-    Function = "󰊕",
-    Constructor = "",
-    Field = " ",
-    Variable = "󰀫",
     Class = "󰠱",
+    Color = "󰏘",
+    Codeium = "",
+    Constant = "󰏿",
+    Constructor = "",
+    Copilot = "",
+    Enum = "",
+    EnumMember = "",
+    Event = "",
+    Field = " ",
+    File = "󰈙",
+    Folder = "󰉋",
+    Function = "󰊕",
     Interface = "",
+    Keyword = "󰌋",
+    Method = "󰆧",
+    Misc = " ",
     Module = "",
+    Operator = "󰆕",
     Property = "󰜢",
+    Reference = "",
+    Snippet = "",
+    Struct = "",
+    Text = "󰉿",
+    TypeParameter = " ",
     Unit = "󰑭",
     Value = "󰎠",
-    Enum = "",
-    Keyword = "󰌋",
-    Snippet = "",
-    Color = "󰏘",
-    File = "󰈙",
-    Reference = "",
-    Folder = "󰉋",
-    EnumMember = "",
-    Constant = "󰏿",
-    Struct = "",
-    Event = "",
-    Operator = "󰆕",
-    TypeParameter = " ",
-    Misc = " ",
+    Variable = "󰀫",
 }
 
 function plugin.config()
@@ -123,12 +126,15 @@ function plugin.config()
             end,
         },
         sources = {
+            { name = "calc" },
+            { name = "path" },
+            { name = "copilot" },
             { name = "nvim_lsp_signature_help" },
             { name = "nvim_lsp" },
+            { name = "codeium" },
             { name = "nvim_lua" },
             { name = "luasnip" },
             { name = "buffer" },
-            { name = "path" },
         },
         confirm_opts = {
             behavior = cmp.ConfirmBehavior.Replace,

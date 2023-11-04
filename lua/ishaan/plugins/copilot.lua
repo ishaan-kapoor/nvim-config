@@ -12,23 +12,36 @@ function plugin.config()
     }
 end
 
+-- return plugin
+
 local copilot_lua = {
-    "zbirenbaum/copilot-lua",
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
     event = { "VeryLazy", "InsertEnter" },
-    cmd = "CopilotLua",
     config = true
 }
 copilot_lua.opts = {
-    suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-            accept = "<C-y>",
-            accept_word = "<C-y>w",
-            accept_line = "<C-y>l",
-            dismiss = "<Esc>",
-        }
-    },
+    panel = { enabled = false },
+    suggestion = { enabled = false },
+    -- suggestion = {
+    --     enabled = true,
+    --     auto_trigger = true,
+    --     keymap = {
+    --         accept = "<C-y>",
+    --         accept_word = "<C-y>w",
+    --         accept_line = "<C-y>l",
+    --         dismiss = "<Esc>",
+    --     }
+    -- },
 }
 
-return plugin
+local copilot_cmp = {
+    "zbirenbaum/copilot-cmp",
+    dependencies = {
+        "zbirenbaum/copilot.lua",
+        "hrsh7th/nvim-cmp",
+    },
+    config = true,
+}
+
+return { copilot_lua, copilot_cmp }

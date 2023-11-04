@@ -151,8 +151,8 @@ end
 function IrregularWhitespace()
     -- USER CONFIG
     -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-    local spaceFiletypes = { python = 4, lua = 4, c = 4, cpp = 4, rust = 4, javascript = 2, typescript = 2, bash = 2 }
-    local ignoredFiletypes = { "css", "markdown", "gitcommit" }
+    local spaceFiletypes = { javascript = 2, typescript = 2, bash = 2 }
+    local ignoredFiletypes = { "css", "markdown", "gitcommit", "text" }
     local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 
     -- vars & guard
@@ -160,7 +160,7 @@ function IrregularWhitespace()
     local usesTabs = not vim.bo.expandtab
     local brUsed = vim.bo.fileformat
     local ft = vim.bo.filetype
-    local width = vim.bo.tabstop
+    local width = vim.bo.softtabstop
     if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then return "" end
 
     -- non-default indentation setting (e.g. changed via indent-o-matic)
