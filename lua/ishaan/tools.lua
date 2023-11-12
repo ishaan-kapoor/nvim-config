@@ -31,6 +31,16 @@ function RunCPCode()
     end
 end
 
+function DebugCompile()
+    vim.cmd(":up")
+    local ft = vim.bo.filetype
+    if ft == "cpp" then
+        vim.cmd("!g++ % -o %< -g")
+    elseif ft == "c" then
+        vim.cmd("!gcc % -o %< -g")
+    end
+end
+
 function Compile()
     vim.cmd(":up")
     -- local buf = vim.api.nvim_get_current_buf()
@@ -151,7 +161,7 @@ end
 function IrregularWhitespace()
     -- USER CONFIG
     -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-    local spaceFiletypes = { javascript = 2, typescript = 2, bash = 2 }
+    local spaceFiletypes = { python = 4, cpp = 2, c = 2, javascript = 2, typescript = 2, bash = 2, lua = 4, rust = 4 }
     local ignoredFiletypes = { "css", "markdown", "gitcommit", "text" }
     local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 

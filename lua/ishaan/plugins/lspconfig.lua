@@ -95,12 +95,13 @@ function plugin.config()
     })
 
     lspconfig.pyright.setup({
+        settings = { python = { analysis = { typeCheckingMode = "off" } } },
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "python" },
         root_dir = function(fname)
             return require("lspconfig/util").root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt")(fname) or require("lspconfig/util").path.dirname(fname)
-        end
+        end,
     })
 
     lspconfig.bashls.setup({

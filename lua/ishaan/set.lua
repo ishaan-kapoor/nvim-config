@@ -39,7 +39,7 @@ vim.opt.splitbelow = true
 
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 
 vim.api.nvim_set_hl(0, "Pmenu", { ctermbg="gray", bg="gray", blend=10 })
 

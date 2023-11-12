@@ -52,7 +52,7 @@ vim.keymap.set('n', "<leader>-", "<C-x>", { desc = "Decrement Number Under Curso
 
 -- Windows & Splits
 -- vim.keymap.set('n', "<leader>w", "<C-w>", { desc = "Window movement using leader key" })
-vim.keymap.set('n', "<leader>ww", "<C-w>w", { desc = "Switch to recent window" })
+-- vim.keymap.set('n', "<leader>ww", "<C-w>w", { desc = "Switch to recent window" })
 vim.keymap.set('n', "<leader>wx", "<Cmd>close <CR>", { desc = "Close window" })
 vim.keymap.set('n', "<leader>wo", "<Cmd> only <CR>", { desc = "Close Other Windows" })
 vim.keymap.set('n', "<leader>wd", "<Cmd>close <CR>", { desc = "Close window" })
@@ -96,6 +96,7 @@ vim.keymap.set('n', "<leader>br", "<Cmd> e <CR>", { desc = "Reload Buffer" })
 vim.keymap.set('n', "<leader>lp", "<Cmd> Lazy <CR>", { desc = "Lazy Profile" })
 
 vim.keymap.set({'n','i'}, "<F3>", Compile, { desc = "Compile the program" })
+vim.keymap.set({'n','i'}, "<F4>", DebugCompile, { desc = "Compile the program with Debug Information" })
 vim.keymap.set({'n','i'}, "<F6>", "<Cmd> up <CR> <Cmd> !./% <CR>", { desc = "Run Executable File" })
 
 vim.keymap.set('n', "<M-/>", RunCode, {noremap = true, desc = "Run the Code"})
