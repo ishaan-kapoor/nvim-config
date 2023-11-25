@@ -28,6 +28,8 @@ vim.opt.colorcolumn = {"80", "120"}
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = false
 vim.opt.laststatus = 3
+-- vim.opt.statuscolumn = "%s %C %l %r"
+vim.opt.showcmdloc = "statusline"
 
 vim.opt.termguicolors = true
 vim.opt.background = "dark"

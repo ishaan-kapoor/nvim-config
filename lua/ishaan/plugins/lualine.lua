@@ -17,16 +17,6 @@ local function show_macro_recording()
     end
 end
 
-local function noice_command()
-    return require("noice").api.status.command.get()
-    -- return "noice"
-end
-
-local function noice_command_status()
-    return require("noice").api.status.command.has()
-    -- return true
-end
-
 -- only show the clock when fullscreen (= it covers the menubar clock)
 local function clock()
     if vim.opt.columns:get() < 150 or vim.opt.lines:get() < 51 then return "" end
@@ -96,7 +86,7 @@ plugin.opts = {
         },
         lualine_c = {
             { "Current Working Directory", fmt=cwd },
-            { "last executed command", fmt=noice_command, cond = noice_command_status, color = { fg = "#ff9e64" } },
+            { "%S", color = { fg = "#ff9e64" }},
         },
         lualine_x = {
             -- { "filetype", component_separators = bottom_component_sepatators },

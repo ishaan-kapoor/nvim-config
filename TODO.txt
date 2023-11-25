@@ -1,3 +1,12 @@
 use something like benmills/vimux to run buffer in a tmux pane
 typo support: cmd([[abbr teh the]])
 git worktrees look awesome, check them out (source: the primegen)
+
+
+Consider these plugins:
+ use('mattn/emmet-vim')
+ use('mhinz/neovim-remote')
+ use('dylanaraps/wal.vim')
+ use('jpalardy/vim-slime')
+ use('mg979/vim-visual-multi', { branch = 'master' })
+ use('notomo/gesture.nvim')
