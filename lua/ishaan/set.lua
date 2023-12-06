@@ -50,6 +50,7 @@ vim.lsp.set_log_level("debug")
 vim.opt.list = true
 vim.opt.listchars = {
     space = "⋅",
+    -- multispace = "|⋅⋅⋅",
     multispace = "⋅⋅⋅󱁐",
     tab = "  »",
     eol = "↴",
