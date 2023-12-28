@@ -13,10 +13,10 @@ local plugin = {
         "hrsh7th/cmp-nvim-lsp",  -- nvim lsp completions
         "neovim/nvim-lspconfig",  -- lsp config
         "nvim-lua/plenary.nvim",  -- lua utils
-        "williamboman/mason-lspconfig.nvim", -- mason-lspconfig
+        -- "williamboman/mason-lspconfig.nvim", -- mason-lspconfig
         "williamboman/mason.nvim",
         "hrsh7th/cmp-nvim-lsp-signature-help",
-        -- 'jose-elias-alvarez/null-ls.nvim',
+        "windwp/nvim-autopairs"
     }
 }
 
@@ -150,6 +150,8 @@ function plugin.config()
             native_menu = false,
         },
     }
+
+    cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
 end
 
 return plugin

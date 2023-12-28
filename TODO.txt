@@ -2,6 +2,7 @@ use something like benmills/vimux to run buffer in a tmux pane
 typo support: cmd([[abbr teh the]])
 git worktrees look awesome, check them out (source: the primegen)
 
+https://github.com/wh75er/dotfiles/tree/master/.config/nvim/lua/core
 
 Consider these plugins:
  use('mattn/emmet-vim')

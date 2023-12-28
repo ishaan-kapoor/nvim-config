@@ -1,54 +1,60 @@
-vim.opt.hidden = true
+local options = vim.opt
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+options.hidden = true
 
-vim.opt.smartindent = true
-vim.opt.smarttab = true
-vim.opt.tabstop = 8
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.autoindent = true
+options.number = true
+options.relativenumber = true
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undofile = true
-vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
+options.smartindent = true
+options.smarttab = true
+options.tabstop = 8
+options.softtabstop = 4
+options.shiftwidth = 4
+options.expandtab = true
+options.autoindent = true
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
+options.swapfile = false
+options.backup = false
+options.undofile = true
+options.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+options.ignorecase = true
+options.smartcase = true
 
-vim.opt.scrolloff = 2
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = {"80", "120"}
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = false
-vim.opt.laststatus = 3
--- vim.opt.statuscolumn = "%s %C %l %r"
-vim.opt.showcmdloc = "statusline"
+options.wildignore = { ".git/*", "node_modules/*" }
+options.wildignorecase = true
 
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
-vim.opt.wrap = true
+options.hlsearch = false
+options.incsearch = true
 
-vim.opt.backspace = {"indent", "eol", "start"}
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+options.scrolloff = 2
+options.signcolumn = "yes"
+options.colorcolumn = {"80", "120"}
+options.cursorline = true
+options.cursorcolumn = false
+options.laststatus = 3
+-- options.statuscolumn = "%s %C %l %r"
+options.showcmdloc = "statusline"
 
-vim.opt.isfname:append("@-@")
-vim.opt.updatetime = 50
-vim.opt.cmdheight = 1
+options.termguicolors = true
+options.background = "dark"
+options.wrap = true
+
+options.backspace = {"indent", "eol", "start"}
+options.splitright = true
+options.splitbelow = true
+options.virtualedit = "block"
+
+options.isfname:append("@-@")
+options.updatetime = 50
+options.cmdheight = 1
 
 vim.api.nvim_set_hl(0, "Pmenu", { ctermbg="gray", bg="gray", blend=10 })
 
 vim.lsp.set_log_level("debug")
 
-vim.opt.list = true
-vim.opt.listchars = {
+options.list = true
+options.listchars = {
     space = "⋅",
     -- multispace = "|⋅⋅⋅",
     multispace = "⋅⋅⋅󱁐",
@@ -59,8 +65,13 @@ vim.opt.listchars = {
     extends = "❯",
     precedes = "❮",
 }
+options.formatoptions = options.formatoptions + {
+    c = false, -- don't auto-wrap comments
+    o = false, -- O and o, don't continue comments
+    r = true, -- Pressing Enter will continue comments
+  }
 
-vim.opt.path:append "**"
+options.path:append "**"
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -79,3 +90,5 @@ vim.g.clipboard = {
     },
     cache_enabled = 0,
 }
+
+BlockRepeatedMotion()

@@ -15,6 +15,7 @@ function plugin.config()
         ensure_installed = { "python", "cpp", "c", "lua", "vim", "vimdoc", "query", "regex", "bash", "markdown", "markdown_inline" },  -- ensure these language parsers are installed
         sync_install = false,
         auto_install = false,  -- auto install above language parsers
+        autotag = { enable = true },  -- enable autotagging
         highlight = {  -- enable syntax highlighting
             enable = true,
             disable = function(lang, buf)
