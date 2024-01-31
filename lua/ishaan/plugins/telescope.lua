@@ -9,7 +9,8 @@ local plugin = {
     keys = {
         { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[F]ind [F]iles" },
         { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "[F]ind by [G]rep" },
-        { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "[F]ind [W]ord" },
+        -- { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "[F]ind [W]ord" },
+        { "<leader>fw", function() require("telescope.builtin").grep_string({search=vim.fn.expand('<cword>')}) end, desc = "[F]ind [W]ord" },
         { "<leader>fb", "<cmd>Telescope buffers theme=dropdown winblend=30<cr>", desc = "[F]ind [B]uffers" },
         { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "[F]ind [H]elp" },
         { "<leader>fd", "<cmd>Telescope diagnostics<cr>", desc = "[F]ind [D]iagnostics" },

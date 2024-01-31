@@ -8,15 +8,16 @@ options.relativenumber = true
 options.smartindent = true
 options.smarttab = true
 options.tabstop = 8
-options.softtabstop = 4
-options.shiftwidth = 4
+options.softtabstop = 2
+options.shiftwidth = 2
 options.expandtab = true
 options.autoindent = true
 
 options.swapfile = false
 options.backup = false
 options.undofile = true
-options.undodir = os.getenv("HOME") .. "/.nvim/undodir"
+-- options.undodir = os.getenv("HOME") .. "/.nvim/undodir"
+options.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"
 
 options.ignorecase = true
 options.smartcase = true
@@ -92,3 +93,7 @@ vim.g.clipboard = {
 }
 
 BlockRepeatedMotion()
+
+-- local highlight = vim.api.nvim_get_hl(0,{["name"]="WinSeparator"})
+-- highlight["fg"] = "None"
+-- vim.api.nvim_set_hl(0,"WinSeparator",highlight)

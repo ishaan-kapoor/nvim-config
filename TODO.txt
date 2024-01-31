@@ -1,10 +1,21 @@
 use something like benmills/vimux to run buffer in a tmux pane
 typo support: cmd([[abbr teh the]])
+https://github.com/chrisgrieser/.config/blob/main/nvim/lua/config/spellfixes.lua
 git worktrees look awesome, check them out (source: the primegen)
 
-https://github.com/wh75er/dotfiles/tree/master/.config/nvim/lua/core
+vmap <Space>p "_d"+P
+vmap <Space>P "_d"+Pcd
 
 Consider these plugins:
  use('mattn/emmet-vim')
  use('mg979/vim-visual-multi', { branch = 'master' })
  use('notomo/gesture.nvim')
+ https://github.com/glacambre/firenvim
+ https://github.com/cshuaimin/ssr.nvim
+ https://github.com/chrisgrieser/nvim-various-textobjs
+ https://github.com/andymass/vim-matchup
+ {
+     'goolord/alpha-nvim',
+     dependencies = { 'nvim-tree/nvim-web-devicons' },
+     config = function () require'alpha'.setup(require'alpha.themes.startify'.config) end
+ };
