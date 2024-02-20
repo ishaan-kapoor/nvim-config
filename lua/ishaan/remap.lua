@@ -110,7 +110,11 @@ map('n', "<M-/>", RunCode, {noremap = true, desc = "Run the Code"})
 map('n', "<leader>ww", "<Cmd> set wrap! <CR>", { desc = "Toggle Word wrap" })
 
 -- Visual
-map("x", "<", "<gv")
-map("x", ">", ">gv")
-map("x", "K", ":move '<-2<CR>gv-gv")
-map("x", "J", ":move '>+1<CR>gv-gv")
+map('x', "<", "<gv")
+map('x', ">", ">gv")
+map('x', "K", ":move '<-2<CR>gv-gv")
+map('x', "J", ":move '>+1<CR>gv-gv")
+
+map('n', "<leader>rc", ":execute 'colo' installed_colorschemes[rand() % n]<CR>:lua ApplyTransparency()<CR>", { desc = "Randomize Colorscheme" })
+-- map('n', "ct", ":lua ApplyTransparency()<CR>", { desc = "Apply Transparency" })
+map('n', "<leader>diff", ":DiffOrig<CR>", { desc = "Open Diff of current file" })

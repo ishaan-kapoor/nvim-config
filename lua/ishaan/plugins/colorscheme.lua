@@ -12,10 +12,11 @@ local tokyonight = {
   "folke/tokyonight.nvim",
   lazy = false,
   priority = 1000,
-  config = function()
-    require("tokyonight").setup()
-    ApplyColorScheme("tokyonight-night", { transparent = true })
-  end,
+  config = true,
+  -- config = function()
+  --   require("tokyonight").setup()
+  --   ApplyColorScheme("tokyonight-night", { transparent = true })
+  -- end,
   opts = {}
 }
 
@@ -114,10 +115,11 @@ local catppuccin = {
       }
     end,
   },
-  config = function(_, opts)
-    require("catppuccin").setup(opts)
-    vim.api.nvim_command("colorscheme catppuccin")
-  end,
+  config = true,
+  -- config = function(_, opts)
+  --   require("catppuccin").setup(opts)
+  --   vim.api.nvim_command("colorscheme catppuccin")
+  -- end,
 }
 
 local themes = {

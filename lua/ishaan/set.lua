@@ -35,6 +35,7 @@ options.cursorline = true
 options.cursorcolumn = false
 options.laststatus = 3
 -- options.statuscolumn = "%s %C %l %r"
+-- options.foldcolumn = '0'
 options.showcmdloc = "statusline"
 
 options.termguicolors = true
@@ -56,21 +57,21 @@ vim.lsp.set_log_level("debug")
 
 options.list = true
 options.listchars = {
-    space = "⋅",
-    -- multispace = "|⋅⋅⋅",
-    multispace = "⋅⋅⋅󱁐",
-    tab = "  »",
-    eol = "↴",
-    conceal = "",
-    nbsp = "•",
-    extends = "❯",
-    precedes = "❮",
+  space = "⋅",
+  -- multispace = "|⋅⋅⋅",
+  multispace = "⋅⋅⋅󱁐",
+  tab = "  »",
+  eol = "↴",
+  conceal = "",
+  nbsp = "•",
+  extends = "❯",
+  precedes = "❮",
 }
 options.formatoptions = options.formatoptions + {
-    c = false, -- don't auto-wrap comments
-    o = false, -- O and o, don't continue comments
-    r = true, -- Pressing Enter will continue comments
-  }
+  c = false, -- don't auto-wrap comments
+  o = false, -- O and o, don't continue comments
+  r = true, -- Pressing Enter will continue comments
+}
 
 options.path:append "**"
 
@@ -80,16 +81,16 @@ vim.g.node_host_prog = "/usr/bin/neovim-node-host"
 vim.g.python3_host_prog = "/usr/bin/python3"
 
 vim.g.clipboard = {
-    name = 'WslClipboard',
-    copy = {
-        ['+'] = 'clip.exe',
-        ['*'] = 'clip.exe',
-    },
-    paste = {
-        ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 0,
+  name = 'WslClipboard',
+  copy = {
+    ['+'] = 'clip.exe',
+    ['*'] = 'clip.exe',
+  },
+  paste = {
+    ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  },
+  cache_enabled = 0,
 }
 
 BlockRepeatedMotion()
