@@ -40,6 +40,10 @@ local function lspServers()
   return table.concat(buf_client_names, '|')
 end
 
+local function colorscheme()
+  return vim.g.colors_name or "default"
+end
+
 local bottom_section_sepatators = { left = "", right = "" }
 local top_section_sepatators = { left = "", right = "" }
 local emptySeparators = { left = "", right = "" }
@@ -81,6 +85,7 @@ plugin.opts = {
       { "macro recording", fmt = show_macro_recording },
     },
     lualine_b = {
+      { "colorscheme", fmt = colorscheme },
       { "lsp servers", fmt = lspServers },
       { "diagnostics", sources = { "nvim_diagnostic" }, },
     },
