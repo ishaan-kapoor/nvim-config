@@ -46,14 +46,14 @@ local on_attach = function(client, bufnr)
 
   -- set keybinds
   local map = vim.keymap.set
-  local opts = { noremap = true, silent = true, buffer = bufnr, desc = "LSP Keybinds" }   -- keybind options
+  local opts = { noremap = true, silent = true, buffer = bufnr, desc = "LSP Keybinds" } -- keybind options
   opts.desc = "Restart LSP"; map('n', "<leader>lr", ":LspRestart<CR>", opts);
   -- opts.desc = "Format Document"; map('n', "<leader>gf", vim.lsp.buf.format, opts);
-  opts.desc = "Go to Definition"; map('n', "gd", telescope.lsp_definitions, opts);                  -- map('n', "gd", vim.lsp.buf.definition, opts)
+  opts.desc = "Go to Definition"; map('n', "gd", telescope.lsp_definitions, opts);                -- map('n', "gd", vim.lsp.buf.definition, opts)
   opts.desc = "Go to Declaration"; map('n', "gD", vim.lsp.buf.declaration, opts);
-  opts.desc = "List Implementations"; map('n', "gi", telescope.lsp_implementations, opts);          -- map('n', "gi", vim.lsp.buf.implementation, opts)
-  opts.desc = "List References"; map('n', "gr", telescope.lsp_references, opts);                    -- map('n', "gr", vim.lsp.buf.references, opts)
-  opts.desc = "Telescope type Definitions"; map('n', "gt", telescope.lsp_type_definitions, opts);   -- map('n', "gt", vim.lsp.buf.type_definition, opts)
+  opts.desc = "List Implementations"; map('n', "gi", telescope.lsp_implementations, opts);        -- map('n', "gi", vim.lsp.buf.implementation, opts)
+  opts.desc = "List References"; map('n', "gr", telescope.lsp_references, opts);                  -- map('n', "gr", vim.lsp.buf.references, opts)
+  opts.desc = "Telescope type Definitions"; map('n', "gt", telescope.lsp_type_definitions, opts); -- map('n', "gt", vim.lsp.buf.type_definition, opts)
   opts.desc = "LSP Hover"; map('n', "K", vim.lsp.buf.hover, opts);
   opts.desc = "LSP Workspace Symbol"; map('n', "<leader>ws", vim.lsp.buf.workspace_symbol, opts);
   -- opts.desc = "Open Diagnostic Float"; map('n', "<leader>vd", vim.diagnostic.open_float, opts); -- autocommand executed on cursor hold
@@ -109,8 +109,12 @@ function plugin.config()
     capabilities = capabilities,
     on_attach = on_attach,
     -- filetypes = { "python" },
-    root_dir = function(fname) return require("lspconfig/util").root_pattern(".git", "setup.py", "setup.cfg",
-        "pyproject.toml", "requirements.txt")(fname) or require("lspconfig/util").path.dirname(fname) end,
+    root_dir = function(fname)
+      local util = require("lspconfig/util")
+      local root_pattern = util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
+      local dirname = util.path.dirname(fname)
+      return root_pattern or dirname
+    end,
   })
 
   lspconfig.bashls.setup({
@@ -156,7 +160,7 @@ function plugin.config()
     capabilities = capabilities,
     on_attach = on_attach,
     -- filetypes = { "lua" },
-    settings = {     -- custom settings for lua
+    settings = { -- custom settings for lua
       Lua = {
         -- make the language server recognize "vim" global
         diagnostics = { globals = { "vim" }, },

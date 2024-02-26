@@ -1,7 +1,7 @@
 local plugin = {
   "windwp/nvim-autopairs",
   event = "VeryLazy",
-  config=true
+  config = true
 }
 
 -- function plugin.config()

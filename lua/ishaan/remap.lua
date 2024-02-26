@@ -115,6 +115,18 @@ map('x', ">", ">gv")
 map('x', "K", ":move '<-2<CR>gv-gv")
 map('x', "J", ":move '>+1<CR>gv-gv")
 
-map('n', "<leader>rc", ":execute 'colo' installed_colorschemes[rand() % n]<CR>:lua ApplyTransparency()<CR>", { desc = "Randomize Colorscheme" })
--- map('n', "ct", ":lua ApplyTransparency()<CR>", { desc = "Apply Transparency" })
+map('n', "<leader>rc", ":execute 'colo' dark_colorschemes[rand() % n]<CR>", { desc = "Randomize Colorscheme" })
+-- map('n', "<leader>rc", ":execute 'colo' installed_colorschemes[rand() % n]<CR>", { desc = "Randomize Colorscheme" })
+map('n', "<leader>at", ":lua ApplyTransparency()<CR>", { desc = "Apply Transparency" })
 map('n', "<leader>diff", ":DiffOrig<CR>", { desc = "Open Diff of current file" })
+
+local opts = { noremap=true, silent=true }
+
+local function quickfix()
+  vim.lsp.buf.code_action({
+    filter = function(a) return a.isPreferred end,
+    apply = true
+  })
+end
+
+vim.keymap.set('n', '<leader>qf', quickfix, opts)

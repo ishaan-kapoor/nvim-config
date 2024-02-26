@@ -12,19 +12,29 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-    -- { 'mg979/vim-visual-multi', { branch = 'master' } },
-    -- 'mattn/emmet-vim',
-    -- 'Rasukarusan/nvim-select-multi-line',
-    -- 'notomo/gesture.nvim',
-    -- 'lervag/vimtex',
-    -- 'sirver/ultisnips',
-    -- 'mhinz/neovim-remote',
-    -- 'dylanaraps/wal.vim',
-    -- 'jpalardy/vim-slime',
-    -- 'monaqa/dial.nvim',
-    -- 'sindrets/winshift.nvim',
-    -- 'anuvyklack/hydra.nvim',
-    -- 'TaDaa/vimade',
+  { 'mg979/vim-visual-multi', { branch = 'master' } },
+  'mattn/emmet-vim',
+  'Rasukarusan/nvim-select-multi-line',
+  'notomo/gesture.nvim',
+  'lervag/vimtex',
+  'sirver/ultisnips',
+  'mhinz/neovim-remote',
+  'dylanaraps/wal.vim',
+  'jpalardy/vim-slime',
+  'monaqa/dial.nvim',
+  'sindrets/winshift.nvim',
+  'anuvyklack/hydra.nvim',
+  'TaDaa/vimade',
+  'glacambre/firenvim',
+  'cshuaimin/ssr.nvim',
+  'chrisgrieser/nvim-various-textobjs',
+  'chamindra/marvim/',
+  'andymass/vim-matchup',
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
+  },
 }
 
 local opts = {

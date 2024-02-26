@@ -1,87 +1,86 @@
 function ApplyTransparency()
-    vim.api.nvim_set_hl(0, "Normal", { bg = nil })
-    vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
-    vim.api.nvim_set_hl(0, "Whitespace", { bg = nil })
-    vim.api.nvim_set_hl(0, "SpecialKey", { bg = nil })
-    vim.api.nvim_set_hl(0, "NonText", { bg = nil })
+  vim.api.nvim_set_hl(0, "Normal", { bg = nil })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
+  vim.api.nvim_set_hl(0, "Whitespace", { bg = nil })
+  vim.api.nvim_set_hl(0, "SpecialKey", { bg = nil })
+  vim.api.nvim_set_hl(0, "NonText", { bg = nil })
 end
 
 function ApplyColorScheme(color, opts)
-    opts = opts or {}
-    color = color or "gruvbox"
-    vim.cmd.colorscheme(color)
-    if opts.transparent then
-        ApplyTransparency()
-    end
+  opts = opts or {}
+  color = color or "gruvbox"
+  vim.cmd.colorscheme(color)
+  if opts.transparent then
+    ApplyTransparency()
+  end
 end
 
 function RunCPCode()
-    vim.cmd(":up")
-    local ft = vim.bo.filetype
-    if ft == "python" then
-        vim.cmd("!python3 % < input.txt &> output.txt")
-    elseif ft == "cpp" then
-        vim.cmd("!g++ % -o %< &> output.txt")
-        vim.cmd("! ./%< < input.txt &> output.txt")
-        vim.cmd("!rm %<")
-    elseif ft == "c" then
-        vim.cmd("!gcc % -o %< &> output.txt && ./%< < input.txt &> output.txt && rm %<")
-    elseif ft == "rust" then
-        vim.cmd("!rustc % -o %< &> output.txt && ./%< < input.txt &> output.txt && rm %<")
-    end
+  vim.cmd(":up")
+  local ft = vim.bo.filetype
+  if ft == "python" then
+    vim.cmd("!python3 % < input.txt &> output.txt")
+  elseif ft == "cpp" then
+    vim.cmd("!g++ % -o %< &> output.txt")
+    vim.cmd("! ./%< < input.txt &> output.txt")
+    vim.cmd("!rm %<")
+  elseif ft == "c" then
+    vim.cmd("!gcc % -o %< &> output.txt && ./%< < input.txt &> output.txt && rm %<")
+  elseif ft == "rust" then
+    vim.cmd("!rustc % -o %< &> output.txt && ./%< < input.txt &> output.txt && rm %<")
+  end
 end
 
 function DebugCompile()
-    vim.cmd(":up")
-    local ft = vim.bo.filetype
-    if ft == "cpp" then
-        vim.cmd("!g++ % -o %< -g")
-    elseif ft == "c" then
-        vim.cmd("!gcc % -o %< -g")
-    end
+  vim.cmd(":up")
+  local ft = vim.bo.filetype
+  if ft == "cpp" then
+    vim.cmd("!g++ % -o %< -g")
+  elseif ft == "c" then
+    vim.cmd("!gcc % -o %< -g")
+  end
 end
 
 function Compile()
-    vim.cmd(":up")
-    -- local buf = vim.api.nvim_get_current_buf()
-    -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-    local ft = vim.bo.filetype
-    if ft == "cpp" then
-        vim.cmd("!g++ % -o %<")
-    elseif ft == "c" then
-        vim.cmd("!gcc % -o %<")
-    elseif ft == "rust" then
-        vim.cmd("!rustc % -o %<")
-    end
+  vim.cmd(":up")
+  -- local buf = vim.api.nvim_get_current_buf()
+  -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+  local ft = vim.bo.filetype
+  if ft == "cpp" then
+    vim.cmd("!g++ % -o %<")
+  elseif ft == "c" then
+    vim.cmd("!gcc % -o %<")
+  elseif ft == "rust" then
+    vim.cmd("!rustc % -o %<")
+  end
 end
 
 function RunCode()
-    local ft = vim.bo.filetype
-    if ft == "python" then
-        vim.cmd(":up")
-        vim.cmd("!python3 %")
-    elseif ((ft == "cpp") or (ft == "c")) or (ft == "rust") then
-        Compile()
-        vim.cmd("! ./%<")
-    end
+  local ft = vim.bo.filetype
+  if ft == "python" then
+    vim.cmd(":up")
+    vim.cmd("!python3 %")
+  elseif ((ft == "cpp") or (ft == "c")) or (ft == "rust") then
+    Compile()
+    vim.cmd("! ./%<")
+  end
 end
 
 function CompetetiveProgramming()
-    vim.cmd("vsplit")
-    vim.cmd("e input.txt")
+  vim.cmd("vsplit")
+  vim.cmd("e input.txt")
 
-    vim.cmd("split")
-    vim.cmd("e output.txt")
+  vim.cmd("split")
+  vim.cmd("e output.txt")
 
-    -- vim.cmd("wincmd k")
-    -- vim.cmd("vsplit")
-    -- vim.cmd("e error.txt")
-    --
-    -- vim.cmd("wincmd j")
-    vim.cmd("wincmd h")
+  -- vim.cmd("wincmd k")
+  -- vim.cmd("vsplit")
+  -- vim.cmd("e error.txt")
+  --
+  -- vim.cmd("wincmd j")
+  vim.cmd("wincmd h")
 
-    vim.keymap.set('n', "<M-/>", RunCPCode, {noremap = true, desc = "Run the Code in CP way"})
-
+  vim.keymap.set('n', "<M-/>", RunCPCode, { noremap = true, desc = "Run the Code in CP way" })
 end
 
 function Export2VSCode()
@@ -107,142 +106,142 @@ function Export2VSCode()
 end
 
 function CtrlD_VSCode()
-    local mode = vim.api.nvim_get_mode().mode
-    local current_word;
-    if mode == 'n' then
-        current_word = vim.call("expand", "<cword>")
-    elseif mode == 'v' then
-        local a_reg = vim.fn.getreg("a")
-        vim.cmd("normal! \"ay")
-        current_word = vim.fn.getreg("a")
-        vim.fn.setreg("a", a_reg)
-    else return
-    end
-    local escape_chars = '"' .. vim.call("escape", "!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~",'"/\\|') .. '"'
-    local replace_with = vim.fn.input("Replace " .. current_word .. " with: ")
-    current_word = vim.call("escape", current_word, escape_chars) 
-    vim.cmd("%s/\\v" .. current_word .. "/" .. replace_with .. "/gc")
+  local mode = vim.api.nvim_get_mode().mode
+  local current_word;
+  if mode == 'n' then
+    current_word = vim.call("expand", "<cword>")
+  elseif mode == 'v' then
+    local a_reg = vim.fn.getreg("a")
+    vim.cmd("normal! \"ay")
+    current_word = vim.fn.getreg("a")
+    vim.fn.setreg("a", a_reg)
+  else
+    return
+  end
+  local escape_chars = '"' .. vim.call("escape", "!\"#$%&'()*+,-./:;<=>?@[\\]^`{|}~", '"/\\|') .. '"'
+  local replace_with = vim.fn.input("Replace " .. current_word .. " with: ")
+  current_word = vim.call("escape", current_word, escape_chars)
+  vim.cmd("%s/\\v" .. current_word .. "/" .. replace_with .. "/gc")
 end
 
 local sessions_dir = vim.fn.expand("~/.config/nvim/sessions")
 function SaveSession()
-    local session_name = vim.fn.input("Session name: ")
-    local session_file = sessions_dir .. "/" .. session_name .. ".vim"
-    local session_exists = vim.fn.filereadable(session_file)
-    if session_exists == 1 then
-        local confirm = vim.fn.confirm("Session already exists. Overwrite?", "&Yes\n&No", 2)
-        -- if not confirm then print message
-        if confirm == 2 then
-            print("Session not saved")
-            return
-        end
+  local session_name = vim.fn.input("Session name: ")
+  local session_file = sessions_dir .. "/" .. session_name .. ".vim"
+  local session_exists = vim.fn.filereadable(session_file)
+  if session_exists == 1 then
+    local confirm = vim.fn.confirm("Session already exists. Overwrite?", "&Yes\n&No", 2)
+    -- if not confirm then print message
+    if confirm == 2 then
+      print("Session not saved")
+      return
     end
-    vim.cmd("mksession! " .. session_file)
+  end
+  vim.cmd("mksession! " .. session_file)
 end
 
 function LoadSession()
-    local session_name = vim.fn.input("Session name: ")
-    local session_file = sessions_dir .. "/" .. session_name .. ".vim"
-    local session_exists = vim.fn.filereadable(session_file)
-    if session_exists == 0 then
-        print("Session does not exist")
-        return
-    end
-    vim.cmd("source " .. session_file)
+  local session_name = vim.fn.input("Session name: ")
+  local session_file = sessions_dir .. "/" .. session_name .. ".vim"
+  local session_exists = vim.fn.filereadable(session_file)
+  if session_exists == 0 then
+    print("Session does not exist")
+    return
+  end
+  vim.cmd("source " .. session_file)
 end
 
 function WriteSudo()
-    vim.cmd("w !sudo tee % > /dev/null")
+  vim.cmd("w !sudo tee % > /dev/null")
 end
-
 
 -- displays irregular indentation and linebreaks, displays nothing when all is good
 -- selene: allow(high_cyclomatic_complexity)
 function IrregularWhitespace()
-    -- USER CONFIG
-    -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-    local spaceFiletypes = { python = 4, cpp = 2, c = 2, javascriptreact = 2, typescriptreact = 2, javascript = 2, typescript = 2, bash = 2, shell = 2, lua = 4, rust = 4 }
-    local ignoredFiletypes = { "css", "markdown", "gitcommit", "text" }
-    local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
+  -- USER CONFIG
+  -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
+  local spaceFiletypes = { python = 4, cpp = 2, c = 2, javascriptreact = 2, typescriptreact = 2, javascript = 2, typescript = 2, bash = 2, shell = 2, lua = 4, rust = 4 }
+  local ignoredFiletypes = { "css", "markdown", "gitcommit", "text" }
+  local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 
-    -- vars & guard
-    local usesSpaces = vim.bo.expandtab
-    local usesTabs = not vim.bo.expandtab
-    local brUsed = vim.bo.fileformat
-    local ft = vim.bo.filetype
-    local width = vim.bo.softtabstop
-    if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then return "" end
+  -- vars & guard
+  local usesSpaces = vim.bo.expandtab
+  local usesTabs = not vim.bo.expandtab
+  local brUsed = vim.bo.fileformat
+  local ft = vim.bo.filetype
+  local width = vim.bo.softtabstop
+  if vim.tbl_contains(ignoredFiletypes, ft) or vim.fn.mode() ~= "n" or vim.bo.buftype ~= "" then return "" end
 
-    -- non-default indentation setting (e.g. changed via indent-o-matic)
-    local nonDefaultSetting = ""
-    local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-    if
-        (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
-        or (usesSpaces and width ~= spaceFiletypes[ft])
-    then
-        nonDefaultSetting = " " .. tostring(width) .. " 󱁐 "
-    elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
-        nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
+  -- non-default indentation setting (e.g. changed via indent-o-matic)
+  local nonDefaultSetting = ""
+  local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
+  if
+      (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
+      or (usesSpaces and width ~= spaceFiletypes[ft])
+  then
+    nonDefaultSetting = " " .. tostring(width) .. " 󱁐 "
+  elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
+    nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
+  end
+
+  -- wrong or mixed indentation
+  local hasTabs = vim.fn.search("^\t", "nw") > 0
+  local hasSpaces = vim.fn.search("^ ", "nw") > 0
+  -- exception, jsdocs: space not followed by "*"
+  if vim.bo.filetype == "javascript" then hasSpaces = vim.fn.search([[^ \(\*\)\@!]], "nw") > 0 end
+  local wrongIndent = ""
+  if usesTabs and hasSpaces then
+    wrongIndent = " 󱁐 "
+  elseif usesSpaces and hasTabs then
+    wrongIndent = " 󰌒 "
+  elseif hasTabs and hasSpaces then
+    wrongIndent = " 󱁐 + 󰌒 "
+  end
+
+  -- line breaks
+  local linebreakIcon = ""
+  if brUsed ~= linebreakType then
+    if brUsed == "unix" then
+      linebreakIcon = " 󰌑 "
+    elseif brUsed == "mac" then
+      linebreakIcon = " 󰌑 "
+    elseif brUsed == "dos" then
+      linebreakIcon = " 󰌑 "
     end
+  end
 
-    -- wrong or mixed indentation
-    local hasTabs = vim.fn.search("^\t", "nw") > 0
-    local hasSpaces = vim.fn.search("^ ", "nw") > 0
-    -- exception, jsdocs: space not followed by "*"
-    if vim.bo.filetype == "javascript" then hasSpaces = vim.fn.search([[^ \(\*\)\@!]], "nw") > 0 end
-    local wrongIndent = ""
-    if usesTabs and hasSpaces then
-        wrongIndent = " 󱁐 "
-    elseif usesSpaces and hasTabs then
-        wrongIndent = " 󰌒 "
-    elseif hasTabs and hasSpaces then
-        wrongIndent = " 󱁐 + 󰌒 "
-    end
-
-    -- line breaks
-    local linebreakIcon = ""
-    if brUsed ~= linebreakType then
-        if brUsed == "unix" then
-            linebreakIcon = " 󰌑 "
-        elseif brUsed == "mac" then
-            linebreakIcon = " 󰌑 "
-        elseif brUsed == "dos" then
-            linebreakIcon = " 󰌑 "
-        end
-    end
-
-    return nonDefaultSetting .. wrongIndent .. linebreakIcon
+  return nonDefaultSetting .. wrongIndent .. linebreakIcon
 end
 
 function BlockRepeatedMotion()
-    local id
-    local tolerance = 10
-    local ok = true
-    for _, key in ipairs({ "h", "j", "k", "l" }) do
-        local count = 0
-        local timer = assert(vim.loop.new_timer())
-        local map = key
-        vim.keymap.set("n", key, function()
-            if vim.v.count > 0 then
-                count = 0
-            end
-            if count >= tolerance then
-                ok, id = pcall(vim.notify, "Hold it Cowboy!", vim.log.levels.WARN, {
-                    icon = "🤠",
-                    replace = id,
-                    keep = function()
-                        return count >= tolerance
-                    end,
-                })
-                if not ok then
-                    id = nil
-                    return map
-                end
-            else
-                count = count + 1
-                timer:start(2000, 0, function() count = 0 end)
-                return map
-            end
-        end, { expr = true, silent = true })
-    end
+  local id
+  local tolerance = 10
+  local ok = true
+  for _, key in ipairs({ "h", "j", "k", "l" }) do
+    local count = 0
+    local timer = assert(vim.loop.new_timer())
+    local map = key
+    vim.keymap.set("n", key, function()
+      if vim.v.count > 0 then
+        count = 0
+      end
+      if count >= tolerance then
+        ok, id = pcall(vim.notify, "Hold it Cowboy!", vim.log.levels.WARN, {
+          icon = "🤠",
+          replace = id,
+          keep = function()
+            return count >= tolerance
+          end,
+        })
+        if not ok then
+          id = nil
+          return map
+        end
+      else
+        count = count + 1
+        timer:start(2000, 0, function() count = 0 end)
+        return map
+      end
+    end, { expr = true, silent = true })
+  end
 end

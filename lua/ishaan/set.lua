@@ -30,7 +30,7 @@ options.incsearch = true
 
 options.scrolloff = 2
 options.signcolumn = "yes"
-options.colorcolumn = {"80", "120"}
+options.colorcolumn = { "80", "120" }
 options.cursorline = true
 options.cursorcolumn = false
 options.laststatus = 3
@@ -42,7 +42,7 @@ options.termguicolors = true
 options.background = "dark"
 options.wrap = true
 
-options.backspace = {"indent", "eol", "start"}
+options.backspace = { "indent", "eol", "start" }
 options.splitright = true
 options.splitbelow = true
 options.virtualedit = "block"
@@ -51,7 +51,7 @@ options.isfname:append("@-@")
 options.updatetime = 50
 options.cmdheight = 1
 
-vim.api.nvim_set_hl(0, "Pmenu", { ctermbg="gray", bg="gray", blend=10 })
+vim.api.nvim_set_hl(0, "Pmenu", { ctermbg = "gray", bg = "gray", blend = 10 })
 
 vim.lsp.set_log_level("debug")
 
@@ -70,7 +70,7 @@ options.listchars = {
 options.formatoptions = options.formatoptions + {
   c = false, -- don't auto-wrap comments
   o = false, -- O and o, don't continue comments
-  r = true, -- Pressing Enter will continue comments
+  r = true,  -- Pressing Enter will continue comments
 }
 
 options.path:append "**"
@@ -93,7 +93,7 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
-BlockRepeatedMotion()
+-- BlockRepeatedMotion()
 
 -- local highlight = vim.api.nvim_get_hl(0,{["name"]="WinSeparator"})
 -- highlight["fg"] = "None"
