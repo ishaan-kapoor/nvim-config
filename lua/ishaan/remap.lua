@@ -75,10 +75,11 @@ map('n', "<leader>wt", "<C-w>T", { desc = "Open window in a new tab" })
 map({'n','v','i'}, "<F1>", "<Cmd>tabprev<CR>", { desc = "Go to previous tab" })
 map('n', "<leader>to", ":tabonly <CR>", { desc = "Close Other Tabs" })
 map('n', "<leader>tt", ":tabnew <CR>", { desc = "Open New Tab" })
+map('n', "<leader>tn", ":tabnew <CR>", { desc = "Open New Tab" })
 map('n', "<leader>tx", ":tabclose <CR>", { desc = "Close Tab" })
 map('n', "<leader>td", ":tabclose <CR>", { desc = "Close Tab" })
-map('n', "<leader>tn", ":tabnext <CR>", { desc = "Next Tab" })
-map('n', "<leader>tp", ":tabprevious <CR>", { desc = "Previous Tab" })
+-- map('n', "<leader>tn", ":tabnext <CR>", { desc = "Next Tab" })
+-- map('n', "<leader>tp", ":tabprevious <CR>", { desc = "Previous Tab" })
 map('n', "<leader>tk", ":tabnext <CR>", { desc = "Next Tab" })
 map('n', "<leader>tj", ":tabprevious <CR>", { desc = "Previous Tab" })
 map('n', "<leader>th", ":tabfirst <CR>", { desc = "First Tab" })
@@ -88,6 +89,8 @@ map('n', "<leader>ts", ":tab split <CR>", { desc = "Tab Split Buffer" })
 -- Buffers
 map('n', "<TAB>", "<cmd>bn<CR>", { desc = "Move to next buffer" })
 map('n', "<S-TAB>", "<cmd>bp<CR>", { desc = "Move to previous buffer" })
+map('n', "<leader>bn", "<Cmd> enew <CR>", { desc = "New Buffer" })
+map('n', "<leader>bb", "<Cmd> enew <CR>", { desc = "New Buffer" })
 map('n', "<leader>bk", "<Cmd> bn <CR>", { desc = "Next Buffer" })
 map('n', "<leader>bj", "<Cmd> bp <CR>", { desc = "Previous Buffer" })
 map('n', "<leader>bd", "<Cmd> bd <CR>", { desc = "Delete Buffer" })
@@ -120,13 +123,3 @@ map('n', "<leader>rc", ":execute 'colo' dark_colorschemes[rand() % n]<CR>", { de
 map('n', "<leader>at", ":lua ApplyTransparency()<CR>", { desc = "Apply Transparency" })
 map('n', "<leader>diff", ":DiffOrig<CR>", { desc = "Open Diff of current file" })
 
-local opts = { noremap=true, silent=true }
-
-local function quickfix()
-  vim.lsp.buf.code_action({
-    filter = function(a) return a.isPreferred end,
-    apply = true
-  })
-end
-
-vim.keymap.set('n', '<leader>qf', quickfix, opts)

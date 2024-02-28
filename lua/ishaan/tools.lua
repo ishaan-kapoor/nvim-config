@@ -81,6 +81,20 @@ function CompetetiveProgramming()
   vim.cmd("wincmd h")
 
   vim.keymap.set('n', "<M-/>", RunCPCode, { noremap = true, desc = "Run the Code in CP way" })
+  vim.keymap.set('n', "<C-_>", DiffOutput, { noremap = true, desc = "Diff output with expected" })
+end
+
+function DiffOutput()
+  vim.cmd("wincmd k")
+  vim.cmd("e expected.txt")
+  vim.cmd("diffthis")
+  vim.cmd("wincmd p")
+  vim.cmd("diffthis")
+  vim.cmd("norm zR")
+  vim.cmd("wincmd h")
+  vim.cmd("e input.txt")
+  vim.cmd("wincmd p")
+  vim.cmd("wincmd j")
 end
 
 function Export2VSCode()

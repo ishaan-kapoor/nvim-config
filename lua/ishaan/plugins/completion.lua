@@ -7,7 +7,7 @@ local plugin = {
     "hrsh7th/cmp-path",             -- path completions
     "hrsh7th/cmp-calc",             -- math evaluation completions
     "saadparwaiz1/cmp_luasnip",     -- snippet completion
-    "rafamadriz/friendly-snippets", -- VSCode like snippets
+    -- "rafamadriz/friendly-snippets", -- VSCode like snippets
     "L3MON4D3/LuaSnip",             -- snippet engine
     -- "molleweide/LuaSnip-snippets.nvim", -- LuaSnip Snippets repository
     "hrsh7th/cmp-nvim-lua",         -- nvim lua completions
@@ -60,21 +60,6 @@ local kind_icons = {
 function plugin.config()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
-  require("luasnip.loaders.from_vscode").lazy_load() -- VSCode like snippets
-  luasnip.add_snippets("python", {
-    luasnip.snippet("int_input_multi", {
-      luasnip.insert_node(1, "N, M"),
-      luasnip.text_node(" = map(int, input().strip().split())")
-    }),
-    luasnip.snippet("int_input", {
-      luasnip.insert_node(1, "N"),
-      luasnip.text_node(" = int(input())")
-    }),
-    luasnip.snippet("array_input", {
-      luasnip.insert_node(1, "arr"),
-      luasnip.text_node(" = list(map(int, input().strip().split()))")
-    }),
-  })
   vim.opt.completeopt = "menu,menuone,noselect"
 
   cmp.setup {
@@ -141,12 +126,12 @@ function plugin.config()
     sources = {
       { name = "calc" },
       { name = "path" },
-      { name = "copilot" },
+      { name = "luasnip" },
       { name = "nvim_lsp_signature_help" },
       { name = "nvim_lsp" },
+      { name = "copilot" },
       { name = "codeium" },
       { name = "nvim_lua" },
-      { name = "luasnip" },
       { name = "buffer" },
     },
     confirm_opts = {

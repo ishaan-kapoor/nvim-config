@@ -47,6 +47,13 @@ local on_attach = function(client, bufnr)
   -- set keybinds
   local map = vim.keymap.set
   local opts = { noremap = true, silent = true, buffer = bufnr, desc = "LSP Keybinds" } -- keybind options
+  local function quickfix()
+    vim.lsp.buf.code_action({
+      filter = function(a) return a.isPreferred end,
+      apply = true
+    })
+  end
+  opts.desc = "Quick Fix"; map('n', '<leader>qf', quickfix, opts)
   opts.desc = "Restart LSP"; map('n', "<leader>lr", ":LspRestart<CR>", opts);
   -- opts.desc = "Format Document"; map('n', "<leader>gf", vim.lsp.buf.format, opts);
   opts.desc = "Go to Definition"; map('n', "gd", telescope.lsp_definitions, opts);                -- map('n', "gd", vim.lsp.buf.definition, opts)
