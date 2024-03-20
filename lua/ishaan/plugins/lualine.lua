@@ -34,7 +34,7 @@ local function cwd()
 end
 
 local function lspServers()
-  local buf_clients = vim.lsp.get_clients({ bufnr = 0 })
+  local buf_clients = {} --vim.lsp.get_clients({ bufnr = 0 }) -- Uncomment in v0.10 but not in 0.9
   local buf_client_names = {}
   for _, client in pairs(buf_clients) do table.insert(buf_client_names, client.name) end
   return table.concat(buf_client_names, '|')
