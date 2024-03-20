@@ -35,6 +35,15 @@ local plugins = {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
   },
+  "altermo/small.nvim",
+  {
+    'tamton-aquib/duck.nvim',
+    config = function()
+      vim.keymap.set('n', '<leader>dd', function() require("duck").hatch("🐤", 10) end, {})
+      vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
+      vim.keymap.set('n', '<leader>da', function() require("duck").cook_all() end, {})
+    end
+  },
 }
 
 local opts = {

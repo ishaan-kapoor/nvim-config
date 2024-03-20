@@ -7,3 +7,5 @@ vmap <Space>p "_d"+P
 vmap <Space>P "_d"+Pcd
 
 Consider the plugins in lazy.lua
+Presentations: https://www.youtube.com/watch?v=GDa7hrbcCB8
+https://github.com/Chaitanyabsprip/present.nvim

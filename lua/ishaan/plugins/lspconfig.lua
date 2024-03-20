@@ -60,6 +60,7 @@ local on_attach = function(client, bufnr)
   opts.desc = "Go to Declaration"; map('n', "gD", vim.lsp.buf.declaration, opts);
   opts.desc = "List Implementations"; map('n', "gi", telescope.lsp_implementations, opts);        -- map('n', "gi", vim.lsp.buf.implementation, opts)
   opts.desc = "List References"; map('n', "gr", telescope.lsp_references, opts);                  -- map('n', "gr", vim.lsp.buf.references, opts)
+  opts.desc = "List Symbols"; map('n', "fs", telescope.lsp_document_symbols, opts);
   opts.desc = "Telescope type Definitions"; map('n', "gt", telescope.lsp_type_definitions, opts); -- map('n', "gt", vim.lsp.buf.type_definition, opts)
   opts.desc = "LSP Hover"; map('n', "K", vim.lsp.buf.hover, opts);
   opts.desc = "LSP Workspace Symbol"; map('n', "<leader>ws", vim.lsp.buf.workspace_symbol, opts);
@@ -72,9 +73,7 @@ local on_attach = function(client, bufnr)
   opts.desc = "Signature help"; map('n', "<leader>h", vim.lsp.buf.signature_help, opts);
   opts.desc = "Add Workspace Folder"; map('n', "<leader>wa", vim.lsp.buf.add_workspace_folder, opts);
   opts.desc = "Remove Workspace folder"; map('n', "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts);
-  opts.desc = "List workspace Folder"; map('n', "<leader>wl",
-    function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts);
-  -- opts.desc = "Go to type Definition"; map('n', "<leader>D", vim.lsp.buf.type_definition, opts)
+  opts.desc = "List workspace Folder"; map('n', "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts);
   -- opts.desc = "Show line diagnostics"; map('n', "<leader>l", vim.lsp.diagnostic.show_line_diagnostics, opts)
   -- opts.desc = "Set Loclist"; map('n', "<leader>q", vim.lsp.diagnostic.set_loclist, opts)
   -- map('n', "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
@@ -88,18 +87,19 @@ local on_attach = function(client, bufnr)
   -- map('n', "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
   -- map('n', "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
 end
-
 function plugin.config()
   local lspconfig = require("lspconfig") -- import lspconfig plugin
   local cmp_nvim_lsp = require("cmp_nvim_lsp") -- import cmp-nvim-lsp plugin
   local capabilities = cmp_nvim_lsp.default_capabilities() -- used to enable autocompletion (assign to every lsp server config)
+  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- capabilities = vim.tbl_extend("force", capabilities, cmp_nvim_lsp.default_capabilities())
+  -- capabilities = vim.tbl_extend("keep", capabilities, cmp_nvim_lsp.update_capabilities(capabilities))
 
   local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " } -- Change the Diagnostic symbols in the sign column (gutter)
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
   end
-
 
   lspconfig["clangd"].setup({
     capabilities = capabilities,
