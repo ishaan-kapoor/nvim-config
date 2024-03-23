@@ -9,3 +9,11 @@ vmap <Space>P "_d"+Pcd
 Consider the plugins in lazy.lua
 Presentations: https://www.youtube.com/watch?v=GDa7hrbcCB8
 https://github.com/Chaitanyabsprip/present.nvim
+
+JAVA Setup:
+    Try lombok for java:
+        https://github.com/gmr458/nvim/blob/main/ftplugin/java.lua
+        https://www.youtube.com/watch?v=WelEHE3RwtY
+        https://www.youtube.com/watch?v=C7juSZsM2Fg
+    Manual: https://sookocheff.com/post/vim/neovim-java-ide/
+    Plug and Play: https://github.com/nvim-java/nvim-java

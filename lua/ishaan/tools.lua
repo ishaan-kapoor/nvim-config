@@ -55,12 +55,28 @@ function Compile()
   end
 end
 
+local function has_value(tab, val)
+  for index, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
+end
+
 function RunCode()
   local ft = vim.bo.filetype
+  local compiled_langugages = { "cpp", "c", "rust" }
   if ft == "python" then
     vim.cmd(":up")
-    vim.cmd("!python3 %")
-  elseif ((ft == "cpp") or (ft == "c")) or (ft == "rust") then
+    vim.cmd("!python3 %:p")
+  elseif ft == "java" then
+    vim.cmd(":up")
+    vim.cmd(":! java %:p")
+    -- vim.cmd(":! javac %:t")
+    -- vim.cmd(":! java %:t:r")
+  elseif has_value(compiled_langugages, ft) then
     Compile()
     vim.cmd("! ./%<")
   end
@@ -85,16 +101,17 @@ function CompetetiveProgramming()
 end
 
 function DiffOutput()
-  vim.cmd("wincmd k")
+  vim.cmd("tabnew")
+  vim.cmd("e input.txt")
+  vim.cmd("vsplit")
   vim.cmd("e expected.txt")
   vim.cmd("diffthis")
-  vim.cmd("wincmd p")
+  vim.cmd("split")
+  vim.cmd("e output.txt")
   vim.cmd("diffthis")
   vim.cmd("norm zR")
-  vim.cmd("wincmd h")
-  vim.cmd("e input.txt")
-  vim.cmd("wincmd p")
-  vim.cmd("wincmd j")
+  vim.cmd("wincmd k")
+  vim.cmd("norm zR")
 end
 
 function Export2VSCode()
@@ -174,7 +191,7 @@ end
 function IrregularWhitespace()
   -- USER CONFIG
   -- filetypes and the number of spaces they use. Omit or set to nil to use tabs for that filetype.
-  local spaceFiletypes = { python = 4, cpp = 2, c = 2, javascriptreact = 2, typescriptreact = 2, javascript = 2, typescript = 2, bash = 2, shell = 2, lua = 2, rust = 4 }
+  local spaceFiletypes = { python = 4, cpp = 2, c = 2, javascriptreact = 2, typescriptreact = 2, javascript = 2, typescript = 2, bash = 2, shell = 2, lua = 2, rust = 4, java = 2 }
   local ignoredFiletypes = { "css", "markdown", "gitcommit", "text" }
   local linebreakType = "unix" ---@type "unix" | "mac" | "dos"
 

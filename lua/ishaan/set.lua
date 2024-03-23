@@ -35,7 +35,7 @@ options.colorcolumn = { "80", "120" }
 options.cursorcolumn = false
 options.laststatus = 3
 -- options.statuscolumn = "%s %C %l %r"
--- options.foldcolumn = '0'
+options.foldcolumn = '1'
 options.showcmdloc = "statusline"
 
 options.termguicolors = true

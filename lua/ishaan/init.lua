@@ -4,4 +4,5 @@ require("ishaan.remap")
 require("ishaan.vimscript")
 require("ishaan.autocmd")
 require("ishaan.lazy")
+require("ishaan.intro_screen")
 

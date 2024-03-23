@@ -162,6 +162,26 @@ function plugin.config()
     },
   })
 
+  lspconfig.jdtls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    -- filetypes = { "java" },
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/jdtls") },
+    -- root_dir = vim.fn.expand("~/.local/share/nvim/mason/bin/jdtls"),
+    -- root_dir = vim.fs.dirname(vim.fs.find({ ".gradlew", ".git", "mvnw" }, {upward=true})[1]) or vim.fn.getcwd(),
+    root_dir = function(fname)
+      return vim.fs.dirname(vim.fs.find({ ".gradlew", ".git", "mvnw" }, {upward=true})[1]) or vim.fn.getcwd()
+      -- local util = require("lspconfig/util")
+      -- local root_pattern = util.root_pattern(".gradlew", ".git", "mvnw")(fname)
+      -- local dirname = util.path.dirname(fname)
+      -- return root_pattern or dirname
+    end,
+  })
+
+  -- function plugin.config()
+  --   require('jdtls').start_or_attach(cfg)
+  -- end
+
   -- configure lua server (with special settings)
   lspconfig["lua_ls"].setup({
     capabilities = capabilities,

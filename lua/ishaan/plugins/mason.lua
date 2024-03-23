@@ -21,10 +21,10 @@ function plugin.config()
       "lua_ls",
       "clangd",
       "pyright",
-      "rust-analyzer",
       "codellb",
       "debugpy",
     },
+    automatic_installation = true,
     ui = {     -- configure icons
       icons = {
         package_installed = "✓",
