@@ -129,7 +129,7 @@ function plugin.config()
       { name = "luasnip" },
       { name = "nvim_lsp_signature_help" },
       { name = "nvim_lsp" },
-      { name = "copilot" },
+      -- { name = "copilot" },
       { name = "codeium" },
       { name = "nvim_lua" },
       { name = "buffer" },

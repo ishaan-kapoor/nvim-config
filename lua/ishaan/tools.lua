@@ -41,17 +41,34 @@ function DebugCompile()
   end
 end
 
-function Compile()
-  vim.cmd(":up")
+function Compile(terminal, ft)
+  terminal = terminal or false
+  local command;
+  vim.cmd("up")
   -- local buf = vim.api.nvim_get_current_buf()
   -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-  local ft = vim.bo.filetype
-  if ft == "cpp" then
-    vim.cmd("!g++ % -o %<")
+  ft = ft or vim.bo.filetype
+  if ft == "java" then
+    vim.cmd("make") -- Rest is handled by after/ftplugin/java.lua
+    return;
+  elseif ft == "cpp" then
+    command = "g++ % -o %<"
   elseif ft == "c" then
-    vim.cmd("!gcc % -o %<")
+    -- vim.cmd("compiler gcc")
+    -- vim.cmd("!gcc % -o %<")
+    command = "gcc % -o %<"
   elseif ft == "rust" then
-    vim.cmd("!rustc % -o %<")
+    command = "rustc % -o %<"
+  else
+    print("Couldn't compile FileType: " .. ft)
+    return;
+  end
+  if terminal then
+    vim.cmd("sp")
+    vim.cmd("term " .. command)
+    vim.cmd("startinsert")
+  else
+    vim.cmd("!" .. command)
   end
 end
 
@@ -65,20 +82,55 @@ local function has_value(tab, val)
   return false
 end
 
-function RunCode()
-  local ft = vim.bo.filetype
-  local compiled_langugages = { "cpp", "c", "rust" }
-  if ft == "python" then
-    vim.cmd(":up")
-    vim.cmd("!python3 %:p")
-  elseif ft == "java" then
-    vim.cmd(":up")
-    vim.cmd(":! java %:p")
-    -- vim.cmd(":! javac %:t")
-    -- vim.cmd(":! java %:t:r")
-  elseif has_value(compiled_langugages, ft) then
-    Compile()
-    vim.cmd("! ./%<")
+local function is_executable(file)
+  local v = vim.api.nvim_exec2("!file " .. file, { output = true })
+  if string.find(v.output, "executable", 0, true) then
+    return true;
+  else
+    return false;
+  end
+end
+
+local function starts_with(str, substring)
+  return string.sub(str, 1, string.len(substring)) == substring
+end
+
+function RunCode(terminal)
+  terminal = terminal or false
+  local command;
+  vim.cmd("up")
+  if is_executable(vim.fn.expand("%:p")) then
+    command = "%:p"
+  else
+    local ft = vim.bo.filetype
+    local compiled_langugages = { "cpp", "c", "rust", "java" }
+    if ft == "python" then
+      command = "python3 -u %:p"
+    elseif ft == "java" then
+      local content = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1];
+      if starts_with(content, "package") then
+        Compile(terminal, ft)
+        -- command = "java -cp out %:p"
+        -- command = "javac %:p && java " .. string.match(content, "package%s+(%S+)")
+      -- else
+        -- command = "java %:p"
+        -- command = "javac %:t && java %:t:r"
+      end
+      command = "java -cp out %:p"
+    elseif has_value(compiled_langugages, ft) then
+      Compile()
+      command = "./%<"
+    else
+      print("Couldn't run FileType: " .. ft)
+      return;
+    end
+    if terminal then
+      vim.cmd("sp")
+      vim.cmd("term " .. command)
+      vim.cmd("startinsert")
+    else
+      vim.cmd("!" .. command)
+    end
   end
 end
 

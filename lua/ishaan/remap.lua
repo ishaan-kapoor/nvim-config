@@ -116,10 +116,9 @@ map('n', "<leader>br", "<Cmd> e <CR>", { desc = "Reload Buffer" })
 map('n', "<leader>lp", "<Cmd> Lazy <CR>", { desc = "Lazy Profile" })
 
 map({'n','i'}, "<F3>", Compile, { desc = "Compile the program" })
-map({'n','i'}, "<F4>", DebugCompile, { desc = "Compile the program with Debug Information" })
-map({'n','i'}, "<F6>", "<Cmd> up <CR> <Cmd> !./% <CR>", { desc = "Run Executable File" })
-
-map('n', "<M-/>", RunCode, {noremap = true, desc = "Run the Code"})
+-- map({'n','i'}, "<F4>", DebugCompile, { desc = "Compile the program with Debug Information" })
+map('n', "<F5>", RunCode, {noremap = true, desc = "Run the Curretn Buffer"})
+map('n', "<M-/>", RunCode, {noremap = true, desc = "Run the Curretn Buffer"})
 map('n', "<leader>ww", "<Cmd> set wrap! <CR>", { desc = "Toggle Word wrap" })
 
 -- Visual
@@ -134,3 +133,4 @@ map('n', "<leader>at", ":lua ApplyTransparency()<CR>", { desc = "Apply Transpare
 map('n', "<leader>diff", ":DiffOrig<CR>", { desc = "Open Diff of current file" })
 
 vim.cmd("command! -nargs=0 CP lua CompetetiveProgramming()")
+vim.cmd("command! -nargs=0 ERC lua EDIT_NVIMRC()")
