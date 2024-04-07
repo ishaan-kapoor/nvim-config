@@ -57,14 +57,31 @@ function Compile(terminal, debug)
     print("Couldn't compile FileType: " .. ft)
     return;
   end
-  local command = compiler .. " % -o %<"
-  if debug then command = command .. " -g" end
   if terminal then
+    local command = compiler .. " % -o %<"
+    if debug then command = command .. " -g" end
     vim.cmd("sp")
     vim.cmd("term " .. command)
     vim.cmd("startinsert")
   else
-    vim.cmd("!" .. command)
+    -- vim.cmd("!" .. command)
+    local uv = vim.loop
+    local error_pipe = uv.new_pipe()
+    local opts = {
+      args = {vim.fn.expand("%"), "-o", vim.fn.expand("%<")},
+      stdio = {nil, nil, error_pipe}
+    }
+    local handler
+    local on_exit = function(status)
+      if status == 0 then
+        print("Compiled")
+      else
+        print(status)
+        uv.read_start(error_pipe, function(_, data) if data then print(data) end end)
+      end
+      uv.close(handler)
+    end
+    handler = uv.spawn(compiler, opts, on_exit)
   end
 end
 
