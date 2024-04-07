@@ -7,7 +7,6 @@ local plugin = {
     "nvim-tree/nvim-web-devicons",
   },
   keys = {
-
     { "<leader>f/",         "<cmd>Telescope search_history<CR>",                                                            desc = "Get the [S]earch history" },
     { "<leader>f<leader>c", "<cmd>Telescope colorscheme enable_preview=true<CR>",                                           desc = "Switch [C]olorschemes" },
     { "<leader>f<leader>t", "<cmd>Telescope filetypes theme=dropdown<CR>",                                                  desc = "Change [F]ile[T]ype" },

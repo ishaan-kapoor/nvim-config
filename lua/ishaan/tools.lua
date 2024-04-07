@@ -10,59 +10,55 @@ function ApplyColorScheme(color, opts)
   opts = opts or {}
   color = color or "gruvbox"
   vim.cmd.colorscheme(color)
-  if opts.transparent then
-    ApplyTransparency()
-  end
+  if opts.transparent then ApplyTransparency() end
 end
 
-function RunCPCode()
+function RunCPCode(timeout)
   vim.cmd(":up")
   local ft = vim.bo.filetype
+  local statusCode = 0
+  timeout = timeout or 2
   if ft == "python" then
-    vim.cmd("!python3 % < input.txt &> output.txt")
-  elseif ft == "cpp" then
-    vim.cmd("!g++ % -o %< &> output.txt")
-    vim.cmd("! ./%< < input.txt &> output.txt")
-    vim.cmd("!rm %<")
-  elseif ft == "c" then
-    vim.cmd("!gcc % -o %< &> output.txt && ./%< < input.txt &> output.txt && rm %<")
-  elseif ft == "rust" then
-    vim.cmd("!rustc % -o %< &> output.txt && ./%< < input.txt &> output.txt && rm %<")
+    vim.cmd("!timeout " .. timeout .. " python3 % < input.txt &> output.txt")
+    if (statusCode == 124) then vim.cmd("!echo 'TimeOut' > output.txt") end
+    return
   end
+  local compiler
+  if ft == "cpp" then compiler = "g++"
+  elseif ft == "c" then compiler = "gcc"
+  elseif ft == "rust" then compiler = "rustc"
+  end
+  vim.cmd("!" .. compiler .. " % -o %< &> output.txt")
+  statusCode = vim.v.shell_error
+  if (statusCode ~= 0) then return end
+  vim.cmd("!timeout " .. timeout .. " ./%< < input.txt &> output.txt")
+  statusCode = vim.v.shell_error
+  vim.cmd("!rm %<")
+  if (statusCode == 124) then vim.cmd("!echo 'TimeOut' > output.txt") end
 end
 
-function DebugCompile()
-  vim.cmd(":up")
-  local ft = vim.bo.filetype
-  if ft == "cpp" then
-    vim.cmd("!g++ % -o %< -g")
-  elseif ft == "c" then
-    vim.cmd("!gcc % -o %< -g")
-  end
-end
-
-function Compile(terminal, ft)
+function Compile(terminal, debug)
   terminal = terminal or false
-  local command;
+  debug = debug or false
   vim.cmd("up")
   -- local buf = vim.api.nvim_get_current_buf()
   -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
-  ft = ft or vim.bo.filetype
+  local ft = vim.bo.filetype
   if ft == "java" then
-    vim.cmd("make") -- Rest is handled by after/ftplugin/java.lua
+    -- Rest is handled by ~/.config/nvim/after/ftplugin/java.lua
+    vim.cmd("make")
     return;
-  elseif ft == "cpp" then
-    command = "g++ % -o %<"
-  elseif ft == "c" then
-    -- vim.cmd("compiler gcc")
-    -- vim.cmd("!gcc % -o %<")
-    command = "gcc % -o %<"
-  elseif ft == "rust" then
-    command = "rustc % -o %<"
+  end
+  local compiler
+  if ft == "cpp" then compiler = "g++"
+  elseif ft == "c" then compiler = "gcc"
+  elseif ft == "rust" then compiler = "rustc"
   else
     print("Couldn't compile FileType: " .. ft)
     return;
   end
+  local command = compiler .. " % -o %<"
+  if debug then command = command .. " -g" end
   if terminal then
     vim.cmd("sp")
     vim.cmd("term " .. command)
@@ -78,7 +74,6 @@ local function has_value(tab, val)
       return true
     end
   end
-
   return false
 end
 
@@ -109,10 +104,10 @@ function RunCode(terminal)
     elseif ft == "java" then
       local content = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1];
       if starts_with(content, "package") then
-        Compile(terminal, ft)
+        Compile(terminal)
         -- command = "java -cp out %:p"
         -- command = "javac %:p && java " .. string.match(content, "package%s+(%S+)")
-      -- else
+        -- else
         -- command = "java %:p"
         -- command = "javac %:t && java %:t:r"
       end
@@ -153,8 +148,7 @@ function CompetetiveProgramming()
 end
 
 function DiffOutput()
-  vim.cmd("tabnew")
-  vim.cmd("e input.txt")
+  vim.cmd("tabe input.txt")
   vim.cmd("vsplit")
   vim.cmd("e expected.txt")
   vim.cmd("diffthis")

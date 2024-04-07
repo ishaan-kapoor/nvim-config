@@ -78,7 +78,7 @@ local function create_and_set_minintro_buf(default_buff)
   vim.api.nvim_buf_set_name(intro_buff, PLUGIN_NAME)
   vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = intro_buff })
   vim.api.nvim_set_option_value("buftype", "nofile", { buf = intro_buff })
-  vim.api.nvim_set_option_value("filetype", "minintro", { buf = intro_buff })
+  vim.api.nvim_set_option_value("filetype", "intro", { buf = intro_buff })
   vim.api.nvim_set_option_value("swapfile", false, { buf = intro_buff })
 
   vim.api.nvim_set_current_buf(intro_buff)

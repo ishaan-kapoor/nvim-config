@@ -21,6 +21,7 @@ options.backup = false
 options.undofile = true
 -- options.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 options.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"
+options.confirm = true
 
 options.ignorecase = true
 options.smartcase = true
@@ -95,6 +96,8 @@ vim.g.clipboard = {
   },
   cache_enabled = 0,
 }
+
+require('editorconfig').properties.trim_trailing_whitespace = nil
 
 -- BlockRepeatedMotion()
 

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+BIN_PATH="/home/ishaan/.local/bin/nvim"
+CONFIG_PATH="/home/ishaan/.config/nvim"
+
+rm -f "$CONFIG_PATH/time.log"
+$BIN_PATH --startuptime "$CONFIG_PATH/time.log"
+
+rm -f "$CONFIG_PATH/noplugin_time.log"
+$BIN_PATH --noplugin --startuptime "$CONFIG_PATH/noplugin_time.log"

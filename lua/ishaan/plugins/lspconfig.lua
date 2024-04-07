@@ -54,7 +54,7 @@ local on_attach = function(client, bufnr)
     })
   end
   opts.desc = "Quick Fix"; map('n', '<leader>qf', quickfix, opts)
-  opts.desc = "Restart LSP"; map('n', "<leader>lr", ":LspRestart<CR>", opts);
+  opts.desc = "Restart LSP"; map('n', "<leader>lR", ":LspRestart<CR>", opts);
   -- opts.desc = "Format Document"; map('n', "<leader>gf", vim.lsp.buf.format, opts);
   opts.desc = "Go to Definition"; map('n', "gd", telescope.lsp_definitions, opts);                -- map('n', "gd", vim.lsp.buf.definition, opts)
   opts.desc = "Go to Declaration"; map('n', "gD", vim.lsp.buf.declaration, opts);

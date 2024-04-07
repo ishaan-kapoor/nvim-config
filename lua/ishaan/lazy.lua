@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  'aznhe21/actions-preview.nvim',
   'google/executor.nvim',
   { 'mg979/vim-visual-multi', { branch = 'master' } },
   'mattn/emmet-vim',
