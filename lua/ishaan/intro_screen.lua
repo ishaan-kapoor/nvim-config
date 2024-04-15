@@ -3,6 +3,7 @@
 
 local intro_logo = {
   "                                                       ",
+  "                                                       ",
   "███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗ ",
   "████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║ ",
   "██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║ ",
@@ -14,11 +15,22 @@ local intro_logo = {
   "                             Released: 19th Jan, 2024  ",
   "                                                       ",
   "                                                       ",
+  "         󰩈  Exit                      q                ",
+  "         󰋖  Help                      h                ",
+  "           Color                     l                ",
+  "           Explore                   e                ",
+  "           Plugins                   p                ",
+  "           New File                  n                ",
+  "           Edit Config               c                ",
+  "         󰯌  Load Session              s                ",
+  "         󱫙  Frequent Files            f                ",
+  "                                                       ",
   "                                                       ",
   "    :help news<Enter> to see changes in v0.9           ",
   "    :help iccf<Enter> to help poor children in uganda  ",
 }
 
+table.insert(intro_logo, 2, os.date("%A, %d %B'%y %H:%M:%S %p"))
 local PLUGIN_NAME = "minintro"
 local INTRO_LOGO_HEIGHT = #intro_logo
 local INTRO_LOGO_WIDTH = #intro_logo[1]
@@ -26,6 +38,25 @@ local INTRO_LOGO_WIDTH = #intro_logo[1]
 local autocmd_group = vim.api.nvim_create_augroup(PLUGIN_NAME, {})
 local highlight_ns_id = vim.api.nvim_create_namespace(PLUGIN_NAME)
 local minintro_buff = -1
+
+local function edit_config()
+  vim.cmd("cd ~/.config/nvim/lua/ishaan")
+  vim.cmd("NvimTreeFindFileToggle")
+  require("telescope").extensions.frecency.frecency({workspace = "CWD"})
+  -- EDIT_NVIMRC()
+end
+local function set_keymaps()
+  local keymap_opts = { noremap = true, silent = true, buffer = true }
+  vim.keymap.set('n', "q", ":q<CR>", keymap_opts)
+  vim.keymap.set('n', "h", ":Telescope help_tags<CR>", keymap_opts)
+  vim.keymap.set('n', "l", RandomColorScheme, keymap_opts)
+  vim.keymap.set('n', "e", ":NvimTreeFindFileToggle<CR>", keymap_opts)
+  vim.keymap.set('n', "p", ":Lazy<CR>", keymap_opts)
+  vim.keymap.set('n', "c", edit_config, keymap_opts)
+  vim.keymap.set('n', "s", LoadSession, keymap_opts)
+  vim.keymap.set('n', "f", ":Telescope frecency<CR>", keymap_opts)
+  vim.keymap.set('n', "n", ":enew<CR>", keymap_opts)
+end
 
 local function unlock_buf(buf)
   vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
@@ -68,17 +99,17 @@ local function draw_minintro(buf, logo_width, logo_height)
 
   vim.api.nvim_buf_set_extmark(buf, highlight_ns_id, start_row, start_col, {
     -- end_row = screen_height-2,
-    end_row = start_row+INTRO_LOGO_HEIGHT,
+    end_row = start_row + INTRO_LOGO_HEIGHT,
     hl_group = "Default"
   })
 end
 
 local function create_and_set_minintro_buf(default_buff)
-  local intro_buff = vim.api.nvim_create_buf("nobuflisted", "unlisted")
+  local intro_buff = vim.api.nvim_create_buf(false, false)
   vim.api.nvim_buf_set_name(intro_buff, PLUGIN_NAME)
   vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = intro_buff })
   vim.api.nvim_set_option_value("buftype", "nofile", { buf = intro_buff })
-  vim.api.nvim_set_option_value("filetype", "intro", { buf = intro_buff })
+  vim.api.nvim_set_option_value("filetype", "dashboard", { buf = intro_buff })
   vim.api.nvim_set_option_value("swapfile", false, { buf = intro_buff })
 
   vim.api.nvim_set_current_buf(intro_buff)
@@ -92,8 +123,16 @@ local function set_options()
   vim.opt_local.relativenumber = false    -- disable relative line numbers
   vim.opt_local.list = false              -- disable displaying whitespace
   vim.opt_local.fillchars = { eob = ' ' } -- do not display "~" on each new line
-  vim.opt_local.colorcolumn = "0"         -- disable colorcolumn
-  vim.opt_local.foldcolumn = "0"          -- disable foldcolumn
+  vim.opt_local.colorcolumn = '0'         -- disable colorcolumn
+  vim.opt_local.foldcolumn = '0'          -- disable foldcolumn
+  vim.opt_local.matchpairs = ''
+  vim.opt_local.cursorline = false
+  vim.opt_local.cursorcolumn = false
+  vim.opt_local.wrap = false
+  vim.opt_local.spell = false
+  vim.opt_local.readonly = false
+  vim.opt_local.signcolumn = 'no'
+  vim.opt_local.winbar = ''
 end
 
 local function redraw()
@@ -113,6 +152,7 @@ local function display_minintro(payload)
 
   minintro_buff = create_and_set_minintro_buf(default_buff)
   set_options()
+  set_keymaps()
 
   draw_minintro(minintro_buff, INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT)
 
@@ -144,4 +184,5 @@ function INTRO_SCREEN()
 
   draw_minintro(minintro_buff, INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT)
 end
+
 vim.cmd("command! Intro lua INTRO_SCREEN()")

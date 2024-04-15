@@ -182,6 +182,9 @@ function plugin.config()
   --   require('jdtls').start_or_attach(cfg)
   -- end
 
+  lspconfig.emmet_language_server.setup({})
+
+
   -- configure lua server (with special settings)
   lspconfig["lua_ls"].setup({
     capabilities = capabilities,

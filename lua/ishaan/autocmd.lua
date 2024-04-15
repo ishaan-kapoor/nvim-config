@@ -17,10 +17,10 @@ local help_group = augroup("helpGroup", {})
 autocmd('FileType', {
   pattern = { "help", "man" },
   group = help_group,
-  desc = "Use q to close help windows",
+  desc = "Use q to close help buffer",
   callback = function()
     vim.cmd('setlocal nonumber norelativenumber nowrap')
-    vim.keymap.set('n', 'q', '<cmd>q<CR>', { buffer = true })
+    vim.keymap.set('n', 'q', '<cmd>bd<CR>', { buffer = true })
   end,
 })
 

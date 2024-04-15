@@ -1,9 +1,7 @@
 local plugin = {
   "folke/which-key.nvim",
-  event = "VeryLazy",
-  opts = {
-    -- refer to the configuration section below
-  }
+  -- event = "VeryLazy",
+  opts = {}
 }
 
 function plugin.init()

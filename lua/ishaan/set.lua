@@ -76,6 +76,7 @@ options.formatoptions = options.formatoptions + {
   o = false, -- O and o, don't continue comments
   r = true,  -- Pressing Enter will continue comments
 }
+options.conceallevel = 1
 
 options.path:append "**"
 

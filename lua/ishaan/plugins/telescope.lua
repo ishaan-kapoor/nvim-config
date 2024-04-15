@@ -5,6 +5,7 @@ local plugin = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
+    "nvim-telescope/telescope-frecency.nvim",
   },
   keys = {
     { "<leader>f/",         "<cmd>Telescope search_history<CR>",                                                            desc = "Get the [S]earch history" },
@@ -145,7 +146,8 @@ function plugin.config()
     }
   })
 
-  telescope.load_extension('fzf')
+  telescope.load_extension("fzf")
+  telescope.load_extension("frecency")
 end
 
 return plugin

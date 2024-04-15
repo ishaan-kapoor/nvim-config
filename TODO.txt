@@ -3,6 +3,12 @@ typo support: cmd([[abbr teh the]])
 https://github.com/chrisgrieser/.config/blob/main/nvim/lua/config/spellfixes.lua
 git worktrees look awesome, check them out (source: the primegen)
 
+Fix:
+    dot (.) repeat does not repeat if the motion was done with f.
+        if previous command was "dfa", pressing "." will only repeat "df" and leave out the "a"
+        Caused by `nvim-treesitter.textobjects.repeatable_move`
+    Resolved: help pages open at the bottom, not right when I replace "q" with "bd" in autocmd.lua
+
 vmap <Space>p "_d"+P
 vmap <Space>P "_d"+Pcd
 

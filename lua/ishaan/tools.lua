@@ -13,6 +13,23 @@ function ApplyColorScheme(color, opts)
   if opts.transparent then ApplyTransparency() end
 end
 
+function RandomColorScheme()
+  ApplyColorScheme(vim.api.nvim_eval("dark_colorschemes[rand() % n]"))
+end
+
+-- function to delete all buffers except current ones
+function DeleteOtherBuffers()
+  local currentBufferNumber = vim.fn.bufnr('%')
+  local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+  for _, buffer in ipairs(buffers) do
+    local bufferNumber = buffer.bufnr
+    if bufferNumber ~= currentBufferNumber then
+      vim.api.nvim_buf_delete(bufferNumber, { force = false })
+      -- vim.api.nvim_buf_delete(bufferNumber, { force = true })
+    end
+  end
+end
+
 function RunCPCode(timeout)
   vim.cmd(":up")
   local ft = vim.bo.filetype

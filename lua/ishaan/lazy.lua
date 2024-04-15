@@ -12,39 +12,35 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  'aznhe21/actions-preview.nvim',
-  'google/executor.nvim',
-  { 'mg979/vim-visual-multi', { branch = 'master' } },
-  'mattn/emmet-vim',
   'Rasukarusan/nvim-select-multi-line',
-  'notomo/gesture.nvim',
-  'lervag/vimtex',
-  'sirver/ultisnips',
-  'mhinz/neovim-remote',
-  'dylanaraps/wal.vim',
-  'jpalardy/vim-slime',
-  'monaqa/dial.nvim',
-  'sindrets/winshift.nvim',
-  'anuvyklack/hydra.nvim',
   'TaDaa/vimade',
-  'glacambre/firenvim',
-  'cshuaimin/ssr.nvim',
-  'chrisgrieser/nvim-various-textobjs',
-  'chamindra/marvim/',
+  'altermo/small.nvim',
   'andymass/vim-matchup',
+  'anuvyklack/hydra.nvim',
+  'aznhe21/actions-preview.nvim',
+  'chamindra/marvim/',
+  'chrisgrieser/nvim-various-textobjs',
+  'cshuaimin/ssr.nvim',
+  'dylanaraps/wal.vim',
+  'glacambre/firenvim',
+  'google/executor.nvim',
+  'jpalardy/vim-slime',
+  'lervag/vimtex',
+  'mattn/emmet-vim',
+  'mhinz/neovim-remote',
+  'monaqa/dial.nvim',
+  'notomo/gesture.nvim',
+  'sindrets/winshift.nvim',
+  'sirver/ultisnips',
+  { "eoh-bse/minintro.nvim", config = true, lazy = false },
+  { "junegunn/goyo.vim", keys = { { "<leader>g", "<cmd>lua require('lualine').hide()<CR><CMD>Goyo<CR>", desc = "Toggle Goyo" } } },
+  { "junegunn/limelight.vim", keys = { "<leader>l" } },
+  { "tpope/vim-sleuth", event = "VeryLazy" },
+  { 'mg979/vim-visual-multi', { branch = 'master' } },
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
-  },
-  "altermo/small.nvim",
-  {
-    'tamton-aquib/duck.nvim',
-    config = function()
-      vim.keymap.set('n', '<leader>dd', function() require("duck").hatch("🐤", 10) end, {})
-      vim.keymap.set('n', '<leader>dk', function() require("duck").cook() end, {})
-      vim.keymap.set('n', '<leader>da', function() require("duck").cook_all() end, {})
-    end
   },
 }
 

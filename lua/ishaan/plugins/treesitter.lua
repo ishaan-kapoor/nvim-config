@@ -1,8 +1,8 @@
 local plugin = {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
-  -- event = "VaryLazy",
   build = ":TSUpdate",
+  dependencies = { "windwp/nvim-ts-autotag" }
 }
 
 function plugin.config()
@@ -11,19 +11,20 @@ function plugin.config()
 
   -- configure treesitter
   treesitter.setup({
-    indent = { enable = true },                                                                                                       -- enable indentation
-    ensure_installed = { "python", "cpp", "c", "lua", "vim", "vimdoc", "query", "regex", "bash", "markdown", "markdown_inline" },     -- ensure these language parsers are installed
+    indent = { enable = true }, -- enable indentation
+    ensure_installed = {        -- ensure these language parsers are installed
+      "python", "cpp", "c", "lua", "vim", "vimdoc", "query", "regex", "bash",
+      "markdown", "markdown_inline"
+    },
     sync_install = false,
-    auto_install = false,                                                                                                             -- auto install above language parsers
-    autotag = { enable = true },                                                                                                      -- enable autotagging
-    highlight = {                                                                                                                     -- enable syntax highlighting
+    auto_install = false,        -- auto install above language parsers
+    autotag = { enable = true }, -- enable autotagging
+    highlight = {                -- enable syntax highlighting
       enable = true,
       disable = function(lang, buf)
-        local max_filesize = 100 * 1024         -- 100 KB
+        local max_filesize = 100 * 1024 -- 100 KB
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-          return true
-        end
+        if ok and stats and stats.size > max_filesize then return true end
       end,
     },
     incremental_selection = {
