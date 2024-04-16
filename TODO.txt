@@ -1,6 +1,8 @@
-use something like benmills/vimux to run buffer in a tmux pane
+use something like https://github.com/preservim/vimux to run buffer in a tmux pane
+
 typo support: cmd([[abbr teh the]])
 https://github.com/chrisgrieser/.config/blob/main/nvim/lua/config/spellfixes.lua
+
 git worktrees look awesome, check them out (source: the primegen)
 
 Fix:
@@ -13,12 +15,12 @@ vmap <Space>p "_d"+P
 vmap <Space>P "_d"+Pcd
 
 Consider the plugins in lazy.lua
+
 Presentations: https://www.youtube.com/watch?v=GDa7hrbcCB8
 https://github.com/Chaitanyabsprip/present.nvim
 
 Check all these out: https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
 Try using this: https://github.com/tamton-aquib/stuff.nvim
-Replace nvim-lspconfig's jdtls with jdtls plugin as the former does not support goto definition for java.utils
 
 JAVA Setup:
     Try lombok for java:

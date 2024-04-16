@@ -4,7 +4,8 @@ local plugin = {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
   },
-  config = true
+  config = true,
+  event = "VeryLazy",
 }
 
 return plugin

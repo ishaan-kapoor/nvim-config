@@ -1,6 +1,7 @@
 local gruvbox = {
   "ellisonleao/gruvbox.nvim",
-  lazy = false,
+  -- lazy = false,
+  event = "VeryLazy",
   priority = 1000,
   -- config = function()
   --     require("gruvbox").setup()
@@ -10,7 +11,8 @@ local gruvbox = {
 
 local tokyonight = {
   "folke/tokyonight.nvim",
-  lazy = false,
+  -- lazy = false,
+  event = "VeryLazy",
   priority = 1000,
   config = true,
   -- config = function()
@@ -23,6 +25,7 @@ local tokyonight = {
 local catppuccin = {
   "catppuccin/nvim",
   name = "catppuccin",
+  event = "VeryLazy",
   opts = {
     background = {
       light = "latte",
