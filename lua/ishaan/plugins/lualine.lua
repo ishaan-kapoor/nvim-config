@@ -57,8 +57,8 @@ local top_component_sepatators = { left = "", right = "" }
 plugin.opts = {
   options = {
     icons_enabled = true,
-    theme = "tokyonight",
-    -- theme = 'auto',
+    -- theme = "tokyonight",
+    theme = 'auto',
     -- section_separators = bottom_section_sepatators,
     section_separators = emptySeparators,
     component_separators = emptySeparators,

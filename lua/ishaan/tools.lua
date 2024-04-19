@@ -6,6 +6,77 @@ function ApplyTransparency()
   vim.api.nvim_set_hl(0, "NonText", { bg = nil })
 end
 
+function EDIT_NVIMRC()
+  require("plenary.reload").reload_module("telescope")
+  require("telescope.builtin").find_files(require('telescope.themes').get_dropdown({
+    prompt_title = "~ nvimrc ~",
+    cwd = "~/.config/nvim",
+    shorten_path = true,
+    no_ignore = true,
+    no_parent_ignore = true,
+    layout_strategy = "horizontal",
+    height = 10,
+  }))
+end
+
+function LoadSession()
+  local actions = require "telescope.actions"
+  local session_dir = "~/.config/nvim/sessions/"
+
+  local opts = require("telescope.themes").get_dropdown {
+    prompt_title = "~ Saved Sessions ~",
+    cwd = session_dir,
+    shorten_path = true,
+    no_ignore = true,
+    no_parent_ignore = true,
+    layout_strategy = "horizontal",
+    height = 10,
+  }
+  opts.attach_mappings = function(prompt_bufnr, map)
+    actions.select_default:replace(function()
+      actions.close(prompt_bufnr)
+      vim.cmd("source " .. session_dir .. require("telescope.actions.state").get_selected_entry().value)
+    end)
+    return true
+  end
+  require("telescope.builtin").find_files(opts)
+end
+
+function ColorschemeChange(transparent)
+  local pickers = require "telescope.pickers"
+  local finders = require "telescope.finders"
+  local conf = require("telescope.config").values
+  local actions = require "telescope.actions"
+  local action_state = require "telescope.actions.state"
+
+  local opts = require("telescope.themes").get_dropdown {}
+  opts.transparent = transparent
+
+  pickers.new(opts, {
+    finder = finders.new_table { results = vim.fn.getcompletion("", "color") },
+    sorter = conf.generic_sorter(opts),
+    attach_mappings = function(prompt_bufnr, map)
+      actions.select_default:replace(function()
+        actions.close(prompt_bufnr)
+        ApplyColorScheme(action_state.get_selected_entry().value, opts)
+      end)
+
+      actions.move_selection_next:enhance {
+        post = function()
+          ApplyColorScheme(action_state.get_selected_entry().value, opts)
+        end,
+      }
+      actions.move_selection_previous:enhance {
+        post = function()
+          ApplyColorScheme(action_state.get_selected_entry().value, opts)
+        end,
+      }
+      return true
+    end,
+  }):find()
+  ApplyTransparency()
+end
+
 function ApplyColorScheme(color, opts)
   opts = opts or {}
   color = color or "gruvbox"
@@ -14,7 +85,7 @@ function ApplyColorScheme(color, opts)
 end
 
 function RandomColorScheme()
-  ApplyColorScheme(vim.api.nvim_eval("dark_colorschemes[rand() % n]"))
+  ApplyColorScheme(vim.api.nvim_eval("dark_colorschemes[rand() % len(dark_colorschemes)]"))
 end
 
 -- function to delete all buffers except current ones
@@ -41,9 +112,12 @@ function RunCPCode(timeout)
     return
   end
   local compiler
-  if ft == "cpp" then compiler = "g++"
-  elseif ft == "c" then compiler = "gcc"
-  elseif ft == "rust" then compiler = "rustc"
+  if ft == "cpp" then
+    compiler = "g++"
+  elseif ft == "c" then
+    compiler = "gcc"
+  elseif ft == "rust" then
+    compiler = "rustc"
   end
   vim.cmd("!" .. compiler .. " % -o %< &> output.txt")
   statusCode = vim.v.shell_error
@@ -67,9 +141,12 @@ function Compile(terminal, debug)
     return;
   end
   local compiler
-  if ft == "cpp" then compiler = "g++"
-  elseif ft == "c" then compiler = "gcc"
-  elseif ft == "rust" then compiler = "rustc"
+  if ft == "cpp" then
+    compiler = "g++"
+  elseif ft == "c" then
+    compiler = "gcc"
+  elseif ft == "rust" then
+    compiler = "rustc"
   else
     print("Couldn't compile FileType: " .. ft)
     return;
@@ -85,8 +162,8 @@ function Compile(terminal, debug)
     local uv = vim.loop
     local error_pipe = uv.new_pipe()
     local opts = {
-      args = {vim.fn.expand("%"), "-o", vim.fn.expand("%<")},
-      stdio = {nil, nil, error_pipe}
+      args = { vim.fn.expand("%"), "-o", vim.fn.expand("%<") },
+      stdio = { nil, nil, error_pipe }
     }
     local handler
     local on_exit = function(status)

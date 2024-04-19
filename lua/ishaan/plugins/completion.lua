@@ -1,19 +1,18 @@
 local plugin = {
   "hrsh7th/nvim-cmp",
-  event = { "InsertEnter" },
-  -- event = { 'VeryLazy', 'InsertEnter' },
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    "hrsh7th/cmp-buffer",           -- buffer completions
-    "hrsh7th/cmp-path",             -- path completions
-    "hrsh7th/cmp-calc",             -- math evaluation completions
-    "saadparwaiz1/cmp_luasnip",     -- snippet completion
+    "hrsh7th/cmp-buffer",       -- buffer completions
+    "hrsh7th/cmp-path",         -- path completions
+    "hrsh7th/cmp-calc",         -- math evaluation completions
+    "saadparwaiz1/cmp_luasnip", -- snippet completion
     -- "rafamadriz/friendly-snippets", -- VSCode like snippets
-    "L3MON4D3/LuaSnip",             -- snippet engine
+    "L3MON4D3/LuaSnip",         -- snippet engine
     -- "molleweide/LuaSnip-snippets.nvim", -- LuaSnip Snippets repository
-    "hrsh7th/cmp-nvim-lua",         -- nvim lua completions
-    "hrsh7th/cmp-nvim-lsp",         -- nvim lsp completions
-    "neovim/nvim-lspconfig",        -- lsp config
-    "nvim-lua/plenary.nvim",        -- lua utils
+    "hrsh7th/cmp-nvim-lua",     -- nvim lua completions
+    "hrsh7th/cmp-nvim-lsp",     -- nvim lsp completions
+    "neovim/nvim-lspconfig",    -- lsp config
+    "nvim-lua/plenary.nvim",    -- lua utils
     -- "williamboman/mason-lspconfig.nvim", -- mason-lspconfig
     "williamboman/mason.nvim",
     "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -57,6 +56,12 @@ local kind_icons = {
   Variable = "󰀫",
 }
 
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
 function plugin.config()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
@@ -85,13 +90,22 @@ function plugin.config()
       ["<CR>"] = cmp.mapping.confirm { select = false }, -- Set `select` to `false` to only confirm explicitly selected items.
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          else
+            cmp.select_next_item()
+          end
         elseif luasnip.expandable() then
           luasnip.expand()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         elseif check_backspace() then
           fallback()
+        elseif has_words_before() then
+          cmp.complete()
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          end
         else
           fallback()
         end
@@ -129,7 +143,7 @@ function plugin.config()
       { name = "luasnip" },
       { name = "nvim_lsp_signature_help" },
       { name = "nvim_lsp" },
-      -- { name = "copilot" },
+      { name = "copilot" },
       { name = "codeium" },
       { name = "nvim_lua" },
       { name = "buffer" },
@@ -139,9 +153,9 @@ function plugin.config()
       select = false,
     },
     window = {
-      documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      },
+      -- documentation = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, },
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     experimental = {
       ghost_text = false,

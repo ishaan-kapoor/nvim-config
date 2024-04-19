@@ -18,8 +18,7 @@ for colorscheme in installed_colorschemes
   endif
   call add(dark_colorschemes, colorscheme)
 endfor
-let n = len(dark_colorschemes)
-execute 'colo' dark_colorschemes[rand() % n]
+execute 'colo' dark_colorschemes[rand() % len(dark_colorschemes)]
 
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis

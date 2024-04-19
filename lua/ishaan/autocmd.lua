@@ -69,6 +69,7 @@ autocmd("TermOpen", {
     vim.opt_local.signcolumn = "no"
     -- vim.opt_local.listchars = ""
     vim.opt_local.list = false
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
   end,
 })
 

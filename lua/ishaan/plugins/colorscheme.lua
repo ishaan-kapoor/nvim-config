@@ -1,24 +1,25 @@
 local gruvbox = {
   "ellisonleao/gruvbox.nvim",
-  -- lazy = false,
   event = "VeryLazy",
   priority = 1000,
-  -- config = function()
-  --     require("gruvbox").setup()
-  --     ApplyColorScheme("gruvbox", {transparent = true})
-  -- end,
+  config = function()
+    require("gruvbox").setup()
+    vim.api.nvim_eval("add(dark_colorschemes, 'gruvbox')")
+  end,
 }
 
 local tokyonight = {
   "folke/tokyonight.nvim",
-  -- lazy = false,
   event = "VeryLazy",
   priority = 1000,
-  config = true,
-  -- config = function()
-  --   require("tokyonight").setup()
-  --   ApplyColorScheme("tokyonight-night", { transparent = true })
-  -- end,
+  config = function()
+    require("tokyonight").setup()
+    vim.api.nvim_eval("add(dark_colorschemes, 'tokyonight')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'tokyonight-day')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'tokyonight-night')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'tokyonight-moon')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'tokyonight-storm')")
+  end,
   opts = {}
 }
 
@@ -118,11 +119,14 @@ local catppuccin = {
       }
     end,
   },
-  config = true,
-  -- config = function(_, opts)
-  --   require("catppuccin").setup(opts)
-  --   vim.api.nvim_command("colorscheme catppuccin")
-  -- end,
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
+    vim.api.nvim_eval("add(dark_colorschemes, 'catppuccin-macchiato')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'catppuccin-frappe')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'catppuccin-mocha')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'catppuccin-latte')")
+    vim.api.nvim_eval("add(dark_colorschemes, 'catppuccin')")
+  end,
 }
 
 local themes = {
