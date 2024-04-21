@@ -363,10 +363,11 @@ function IrregularWhitespace()
   -- non-default indentation setting (e.g. changed via indent-o-matic)
   local nonDefaultSetting = ""
   local spaceFtsOnly = vim.tbl_keys(spaceFiletypes)
-  if
-      (usesSpaces and not vim.tbl_contains(spaceFtsOnly, ft))
-      or (usesSpaces and width ~= spaceFiletypes[ft])
-  then
+  local expectedSpaces = vim.opt.softtabstop:get();
+  if vim.tbl_contains(spaceFtsOnly, ft) then
+    expectedSpaces = spaceFiletypes[ft]
+  end
+  if (usesSpaces and width ~= expectedSpaces) then
     nonDefaultSetting = " " .. tostring(width) .. " 󱁐 "
   elseif usesTabs and vim.tbl_contains(spaceFtsOnly, ft) then
     nonDefaultSetting = " 󰌒 " .. tostring(width)(" ")
@@ -493,7 +494,8 @@ function LSP_onAttach(client, bufnr)
   opts.desc = "Signature help"; map('n', "<leader>h", vim.lsp.buf.signature_help, opts);
   opts.desc = "Add Workspace Folder"; map('n', "<leader>wa", vim.lsp.buf.add_workspace_folder, opts);
   opts.desc = "Remove Workspace folder"; map('n', "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts);
-  opts.desc = "List workspace Folder"; map('n', "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts);
+  opts.desc = "List workspace Folder"; map('n', "<leader>wl",
+    function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts);
   -- opts.desc = "Show line diagnostics"; map('n', "<leader>l", vim.lsp.diagnostic.show_line_diagnostics, opts)
   -- opts.desc = "Set Loclist"; map('n', "<leader>q", vim.lsp.diagnostic.set_loclist, opts)
   -- map('n', "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references

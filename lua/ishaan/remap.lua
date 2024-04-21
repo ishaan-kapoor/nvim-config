@@ -11,7 +11,7 @@ map('n', "<leader> ", vim.cmd.source, { desc = "Source Current file" } )
 map('n', "<leader>o", "o<Esc>", { desc = "Insert new line below" })
 map('n', "<leader>O", "O<Esc>", { desc = "Insert new line above" })
 map('v', "<leader>srt", ":sort<CR>", { desc = "sort selected lines" })
-map('n', "<CR>", "r<CR>", { desc = "Replace Current Character with a new line Character" })
+-- map('n', "<CR>", "r<CR>", { desc = "Replace Current Character with a new line Character" })
 
 map('v', ">", ">gv", { desc = "Indent selected text without loosing indentation" })
 map('v', "<", "<gv", { desc = "Indent selected text without loosing indentation" })

@@ -37,6 +37,7 @@ copilot_lua.opts = {
 
 local copilot_cmp = {
   "zbirenbaum/copilot-cmp",
+  event = { "VeryLazy", "InsertEnter" },
   dependencies = {
     "zbirenbaum/copilot.lua",
     "hrsh7th/nvim-cmp",

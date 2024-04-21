@@ -41,8 +41,9 @@ local config = {
           lombok_path,
           "/home/ishaan/.local/mysql-connector-j-8.3.0.jar",
           "/home/ishaan/.local/junit-platform-console-standalone-1.10.0.jar",
+          "/home/ishaan/.local/apache-tomcat-10.1.20/lib/servlet-api.jar",
         },
-        sourcePaths = { "./tests", "./src" }
+        sourcePaths = { "./tests", "./src", "./src/main/java" }
       }
     }
   },

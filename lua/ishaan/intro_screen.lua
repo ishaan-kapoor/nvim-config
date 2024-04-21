@@ -31,7 +31,7 @@ local intro_logo = {
 }
 
 table.insert(intro_logo, 2, os.date("%A, %d %B'%y %H:%M:%S %p"))
-local PLUGIN_NAME = "minintro"
+local PLUGIN_NAME = "dashboard" -- "minintro"
 local INTRO_LOGO_HEIGHT = #intro_logo
 local INTRO_LOGO_WIDTH = #intro_logo[1]
 
@@ -109,7 +109,7 @@ local function create_and_set_minintro_buf(default_buff)
   vim.api.nvim_buf_set_name(intro_buff, PLUGIN_NAME)
   vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = intro_buff })
   vim.api.nvim_set_option_value("buftype", "nofile", { buf = intro_buff })
-  vim.api.nvim_set_option_value("filetype", "dashboard", { buf = intro_buff })
+  vim.api.nvim_set_option_value("filetype", PLUGIN_NAME, { buf = intro_buff })
   vim.api.nvim_set_option_value("swapfile", false, { buf = intro_buff })
 
   vim.api.nvim_set_current_buf(intro_buff)
@@ -148,7 +148,7 @@ local function display_minintro(payload)
   local default_buff = vim.api.nvim_get_current_buf()
   local default_buff_name = vim.api.nvim_buf_get_name(default_buff)
   local default_buff_filetype = vim.api.nvim_get_option_value("filetype", { buf = default_buff })
-  if not is_dir and default_buff_name ~= "" and default_buff_filetype ~= PLUGIN_NAME then return end
+  if is_dir or (default_buff_filetype ~= "") or (default_buff_name ~= "") then return end
 
   minintro_buff = create_and_set_minintro_buf(default_buff)
   set_options()
@@ -156,11 +156,11 @@ local function display_minintro(payload)
 
   draw_minintro(minintro_buff, INTRO_LOGO_WIDTH, INTRO_LOGO_HEIGHT)
 
-  vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, {
-    group = autocmd_group,
-    buffer = minintro_buff,
-    callback = redraw
-  })
+  -- vim.api.nvim_create_autocmd({ "WinResized", "VimResized" }, {
+  --   group = autocmd_group,
+  --   buffer = minintro_buff,
+  --   callback = redraw
+  -- })
 end
 
 local function setup(options)
