@@ -479,7 +479,7 @@ function LSP_onAttach(client, bufnr)
   -- opts.desc = "Format Document"; map('n', "<leader>gf", vim.lsp.buf.format, opts);
   opts.desc = "Go to Definition"; map('n', "gd", telescope.lsp_definitions, opts);                -- map('n', "gd", vim.lsp.buf.definition, opts)
   opts.desc = "Go to Declaration"; map('n', "gD", vim.lsp.buf.declaration, opts);
-  opts.desc = "List Implementations"; map('n', "gi", telescope.lsp_implementations, opts);        -- map('n', "gi", vim.lsp.buf.implementation, opts)
+  opts.desc = "List Implementations"; map('n', "gI", telescope.lsp_implementations, opts);        -- map('n', "gi", vim.lsp.buf.implementation, opts)
   opts.desc = "List References"; map('n', "gr", telescope.lsp_references, opts);                  -- map('n', "gr", vim.lsp.buf.references, opts)
   opts.desc = "List Symbols"; map('n', "fs", telescope.lsp_document_symbols, opts);
   opts.desc = "Telescope type Definitions"; map('n', "gt", telescope.lsp_type_definitions, opts); -- map('n', "gt", vim.lsp.buf.type_definition, opts)

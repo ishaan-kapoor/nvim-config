@@ -1,10 +1,11 @@
 local plugin = {
-  'rcarriga/nvim-dap-ui',
+  "rcarriga/nvim-dap-ui",
   dependencies = {
-    'mfussenegger/nvim-dap',
-    -- 'theHamsta/nvim-dap-virtual-text',
-    'nvim-telescope/telescope.nvim',
-    'nvim-telescope/telescope-dap.nvim',
+    "mfussenegger/nvim-dap",
+    "theHamsta/nvim-dap-virtual-text",
+    "nvim-telescope/telescope.nvim",
+    "nvim-telescope/telescope-dap.nvim",
+    "nvim-neotest/nvim-nio"
   },
   keys = {
     { "<leader>db", "<cmd>DapToggleBreakpoint<CR>",    desc = "Toggle Line Breakpoint" },
@@ -14,13 +15,13 @@ local plugin = {
 }
 
 function plugin.config()
-  local dap = require('dap')
+  local dap = require("dap")
   dap.adapters.codelldb = {
-    type = 'server',
+    type = "server",
     port = "${port}",
     executable = {
       -- CHANGE THIS to your path!
-      command = '/home/ishaan/.local/share/nvim/mason/bin/codelldb',
+      command = "/home/ishaan/.local/share/nvim/mason/bin/codelldb",
       args = { "--port", "${port}" },
 
       -- On windows you may have to uncomment this:
@@ -32,21 +33,23 @@ function plugin.config()
     type = "codelldb",
     request = "launch",
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. '/', "file")
     end,
-    cwd = '${workspaceFolder}',
+    cwd = "${workspaceFolder}",
     stopOnEntry = false,
   }, }
   dap.configurations.c = dap.configurations.cpp
   dap.configurations.rust = dap.configurations.cpp
 
-  require('telescope').load_extension('dap')
+  require("telescope").load_extension("dap")
 
-  local dapui = require('dapui')
+  local dapui = require("dapui")
   dapui.setup()
   dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
   dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
   dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+
+  require("nvim-dap-virtual-text").setup()
 end
 
 return plugin

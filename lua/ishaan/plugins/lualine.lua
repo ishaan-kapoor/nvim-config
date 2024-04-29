@@ -22,7 +22,7 @@ local function clock()
   if vim.opt.columns:get() < 150 or vim.opt.lines:get() < 51 then return "" end
 
   local time = tostring(os.date()):sub(12, 16)
-  if os.time() % 2 == 1 then time = time:gsub(":", " ") end   -- make the `:` blink
+  if os.time() % 2 == 1 then time = time:gsub(":", " ") end -- make the `:` blink
   return time
 end
 
@@ -63,8 +63,23 @@ plugin.opts = {
     section_separators = emptySeparators,
     component_separators = emptySeparators,
     disabled_filetypes = {
-      statusline = { "NvimTree" },
-      winbar = {},
+      statusline = {
+        -- "dap-repl",
+        -- "dapui_breakpoints",
+        -- "dapui_console",
+        -- "dapui_scopes",
+        -- "dapui_watches",
+        -- "dapui_stacks",
+      },
+      winbar = {
+        "NvimTree",
+        "dap-repl",
+        "dapui_breakpoints",
+        "dapui_console",
+        "dapui_scopes",
+        "dapui_watches",
+        "dapui_stacks",
+      },
     },
     ignore_focus = {
       "DressingInput",
