@@ -9,7 +9,11 @@ fi
 cd ~/.config/nvim/Resources/ || exit
 
 sed -i "/\/\//d" "$1"
-python3 -m json.tool "$1" | sponge "$1" # install moreutils for sponge
+# python3 -m json.tool "$1" | sponge "$1" # install moreutils for sponge
+python3 -m json.tool "$1" > ~/.cache/vsc2nvim_theme/"$1"
+mv -f ~/.cache/vsc2nvim_theme/"$1" ./"$1"
 ./djanho -l "$1"
-mv ./generated.lua ../colors/${1%.json}.lua
+name="${1%.json}"
+sed -i "3s;^;vim.g.colors_name = '$name'\n;" generated.lua
+mv ./generated.lua ../after/colors/"$name".lua
 
