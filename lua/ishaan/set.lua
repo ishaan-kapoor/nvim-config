@@ -95,7 +95,7 @@ vim.g.clipboard = {
     ['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
     ['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
   },
-  cache_enabled = 0,
+  cache_enabled = 1,
 }
 
 require('editorconfig').properties.trim_trailing_whitespace = nil
