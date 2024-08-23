@@ -13,6 +13,8 @@ options.shiftwidth = 2
 options.expandtab = true
 options.autoindent = true
 
+options.showmode = false
+
 options.exrc = true -- To enable local config
 options.secure = true -- To disable autocmd, etc in local config
 
