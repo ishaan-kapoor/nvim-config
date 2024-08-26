@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   'Rasukarusan/nvim-select-multi-line',
+  'aserowy/tmux.nvim',
   'TaDaa/vimade',
   'altermo/small.nvim',
   'andymass/vim-matchup',
@@ -37,6 +38,7 @@ local plugins = {
   { "junegunn/limelight.vim", keys = { "<leader>l" } },
   { "tpope/vim-sleuth", event = "VeryLazy" },
   { 'mg979/vim-visual-multi', { branch = 'master' } },
+  { "declancm/cinnamon.nvim", version = "*", opts = { } },
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },

@@ -1,9 +1,11 @@
 local options = vim.opt
 
-options.hidden = true
+options.hidden = true -- Do not unload hidden buffers
+options.title = true -- Change window title to nvim title
+options.mouse = "a" -- Temporary mouse support by holding shift key
 
-options.number = true
-options.relativenumber = true
+options.number = true -- number colunn
+options.relativenumber = true -- relative numbers in number column
 
 options.smartindent = true
 options.smarttab = true
@@ -13,7 +15,7 @@ options.shiftwidth = 2
 options.expandtab = true
 options.autoindent = true
 
-options.showmode = false
+options.showmode = false -- lualine takes care of it
 
 options.exrc = true -- To enable local config
 options.secure = true -- To disable autocmd, etc in local config
@@ -35,6 +37,7 @@ options.hlsearch = false
 options.incsearch = true
 
 options.scrolloff = 2
+options.sidescrolloff = 2
 options.signcolumn = "yes"
 options.colorcolumn = { "80", "120" }
 -- options.cursorline = true

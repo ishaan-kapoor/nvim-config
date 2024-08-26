@@ -1,6 +1,6 @@
 require("ishaan.tools")
 require("ishaan.set")
-require("ishaan.remap")
+require("ishaan.keymaps")
 require("ishaan.vimscript")
 require("ishaan.autocmd")
 require("ishaan.lazy")

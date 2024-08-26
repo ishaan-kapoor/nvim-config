@@ -101,6 +101,42 @@ function DeleteOtherBuffers()
   end
 end
 
+function SwapBool()
+  local c = vim.api.nvim_get_current_line()
+  local ft = vim.bo.filetype
+  local subs;
+  if ft == "python" then
+    subs = c:match("True") and c:gsub("True", "False") or c:gsub("False", "True")
+  else
+    subs = c:match("true") and c:gsub("true", "false") or c:gsub("false", "true")
+  end
+  vim.api.nvim_set_current_line(subs)
+end
+
+function OpenURL(url)
+  local url = url or vim.fn.expand('<cfile>', nil, nil)
+  if not url:match("http") then
+    url = "https://github.com/" .. url
+  end
+  vim.notify("Going to " .. url, vim.log.levels.INFO, { title = "Opening browser..." })
+  vim.fn.jobstart({ "explorer.exe", "microsoft-edge:"..url }, { on_exit = function() end })
+end
+
+local function set_quit_maps()
+  vim.keymap.set('n', 'q', ':bd!<CR>', { buffer = true, silent = true })
+  vim.keymap.set('n', '<ESC>', ':bd!<CR>', { buffer = true, silent = true })
+  vim.keymap.set('n', '<C-c>', ':bd!<CR>', { buffer = true, silent = true })
+end
+
+function CheatSheet(query)
+  query = query or vim.fn.input("Search: ")
+  query = table.concat(vim.split(query, " "), "+")
+  local cmd = ('curl "https://cht.sh/%s/%s"'):format(vim.bo.ft, query)
+  vim.cmd("split | term " .. cmd)
+  vim.cmd [[stopinsert!]]
+  set_quit_maps()
+end
+
 function RunCPCode(timeout)
   vim.cmd(":up")
   local ft = vim.bo.filetype
@@ -508,4 +544,59 @@ function LSP_onAttach(client, bufnr)
   -- map('n', "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
   -- map('n', "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
   -- map('n', "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
+end
+
+function GetVisualSelection()
+  local modeInfo = vim.api.nvim_get_mode()
+  local mode = modeInfo.mode
+
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local cline, ccol = cursor[1], cursor[2]
+  local vline, vcol = vim.fn.line('v'), vim.fn.col('v')
+
+  local sline, scol
+  local eline, ecol
+  if cline == vline then
+    if ccol <= vcol then
+      sline, scol = cline, ccol
+      eline, ecol = vline, vcol
+      scol = scol + 1
+    else
+      sline, scol = vline, vcol
+      eline, ecol = cline, ccol
+      ecol = ecol + 1
+    end
+  elseif cline < vline then
+    sline, scol = cline, ccol
+    eline, ecol = vline, vcol
+    scol = scol + 1
+  else
+    sline, scol = vline, vcol
+    eline, ecol = cline, ccol
+    ecol = ecol + 1
+  end
+
+  if mode == "V" or mode == "CTRL-V" or mode == "\22" then
+    scol = 1
+    ecol = nil
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(0, sline - 1, eline, 0)
+  if #lines == 0 then return end
+
+  local startText, endText
+  if #lines == 1 then
+    startText = string.sub(lines[1], scol, ecol)
+  else
+    startText = string.sub(lines[1], scol)
+    endText = string.sub(lines[#lines], 1, ecol)
+  end
+
+  local selection = { startText }
+  if #lines > 2 then
+    vim.list_extend(selection, vim.list_slice(lines, 2, #lines - 1))
+  end
+  table.insert(selection, endText)
+
+  return selection
 end

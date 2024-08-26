@@ -137,3 +137,16 @@ vim.cmd("command! -nargs=0 CP lua CompetetiveProgramming()")
 vim.cmd("command! -nargs=0 ERC lua EDIT_NVIMRC()")
 
 map('t', "<leader><Esc>", "<C-\\><C-n>", { noremap = true })
+
+-- Extra Functions
+map("v", "<leader>:", function() OpenURL(vim.inspect(GetVisualSelection()[1])) end)
+map("n", "<leader>:", OpenURL)
+map("v", "<leader>/", function() CheatSheet(vim.inspect(GetVisualSelection()[1])) end)
+map("n", "<leader>/", CheatSheet)
+map("n", "<leader>sb", SwapBool)
+-- map('n', "<leader>gl", OpenURL, { noremap = true })
+-- map('v', "<leader>gl", function() OpenURL(GetVisualSelection()[1]) end, { noremap = true })
+-- map('n', "<leader>gq", CheatSheet, { noremap = true })
+-- map('v', "<leader>gq", function() CheatSheet(GetVisualSelection()[1]) end, { noremap = true })
+-- map('n', "sb", SwapBool, { noremap = true })
+
