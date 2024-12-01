@@ -150,3 +150,4 @@ map("n", "<leader>sb", SwapBool)
 -- map('v', "<leader>gq", function() CheatSheet(GetVisualSelection()[1]) end, { noremap = true })
 -- map('n', "sb", SwapBool, { noremap = true })
 
+-- map("n", "gcp", '"ayygcc"ap', { noremap=false, desc = "Duplicate and comment line" })

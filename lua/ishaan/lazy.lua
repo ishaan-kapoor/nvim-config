@@ -49,6 +49,7 @@ local plugins = {
 local opts = {
   change_detection = { notify = false, },
   -- defaults = { lazy = true}
+  rocks = { hererocks = false, enabled = false },
 }
 
 require("lazy").setup("ishaan.plugins", opts)

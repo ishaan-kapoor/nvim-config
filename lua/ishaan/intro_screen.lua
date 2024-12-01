@@ -22,6 +22,7 @@ local intro_logo = {
   "           Plugins                   p                ",
   "           New File                  n                ",
   "           Edit Config               c                ",
+  "           Check Health              d                ",
   "         󰯌  Load Session              s                ",
   "         󱫙  Frequent Files            f                ",
   "                                                       ",
@@ -52,10 +53,11 @@ local function set_keymaps()
   vim.keymap.set('n', "l", RandomColorScheme, keymap_opts)
   vim.keymap.set('n', "e", ":NvimTreeFindFileToggle<CR>", keymap_opts)
   vim.keymap.set('n', "p", ":Lazy<CR>", keymap_opts)
+  vim.keymap.set('n', "n", ":enew<CR>", keymap_opts)
   vim.keymap.set('n', "c", edit_config, keymap_opts)
+  vim.keymap.set('n', "d", ":checkhealth<CR>", keymap_opts)
   vim.keymap.set('n', "s", LoadSession, keymap_opts)
   vim.keymap.set('n', "f", ":Telescope frecency<CR>", keymap_opts)
-  vim.keymap.set('n', "n", ":enew<CR>", keymap_opts)
 end
 
 local function unlock_buf(buf)

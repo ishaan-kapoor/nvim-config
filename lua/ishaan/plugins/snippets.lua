@@ -1,7 +1,8 @@
 local plugin = {
   "L3MON4D3/LuaSnip",             -- snippet engine
   event = { "InsertEnter" },
-  dependencies = { "rafamadriz/friendly-snippets", },
+  dependencies = { "rafamadriz/friendly-snippets" },
+  run = "make install_jsregexp"
 }
 
 function plugin.config()

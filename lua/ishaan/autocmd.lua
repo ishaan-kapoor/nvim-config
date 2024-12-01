@@ -12,10 +12,23 @@ autocmd('TextYankPost', {
   end,
 })
 
+-- go to last loc when opening a buffer
+-- this mean that when you open a file, you will be at the last position
+autocmd("BufReadPost", {
+  group = augroup('OpenBufferInLastLocation', {}),
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
 local help_group = augroup("helpGroup", {})
 
 autocmd('FileType', {
-  pattern = { "help", "man" },
+  pattern = { "checkhealth", "help", "man", "lspinfo", "notify" },
   group = help_group,
   desc = "Use q to close help buffer",
   callback = function()
@@ -33,6 +46,9 @@ autocmd("BufEnter", {
     end
   end,
 })
+
+-- resize neovim split when terminal is resized
+vim.api.nvim_command("autocmd VimResized * wincmd =")
 
 -- autocmd("FileType", {
 --   pattern = {

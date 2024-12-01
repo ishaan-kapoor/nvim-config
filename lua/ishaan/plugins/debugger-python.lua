@@ -16,8 +16,8 @@ local plugin = {
 
 function plugin.config()
   local path = "/home/ishaan/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-  vim.keymap.set('n', '<leader>dpr', '<cmd>lua require("dap-python").test_method()<CR>',
-    { noremap = true, silent = true, desc = "Debug Python Run" })
+  vim.keymap.set('n', '<leader>dbpt', '<cmd>lua require("dap-python").test_method()<CR>',
+    { noremap = true, silent = true, desc = "Debug Python Test Method" })
   require('dap-python').setup(path)
 end
 

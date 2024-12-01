@@ -11,6 +11,8 @@ local plugin = {
     { "<leader>db", "<cmd>DapToggleBreakpoint<CR>",    desc = "Toggle Line Breakpoint" },
     { "<leader>dr", "<cmd>DapContinue<CR>",            desc = "Continue Debugger" },
     { "<leader>df", "<cmd>Telescope dap commands<cr>", desc = "Debug Telescope" },
+    { "<leader>de", "<cmd>lua require('dapui').eval()<cr>", desc = "Eval Expression", mode = {'n', 'v'} },
+    -- { "<leader>de", "<cmd>lua require('dapui').eval()<cr>", desc = "Eval Expression" },
   }
 }
 

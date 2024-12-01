@@ -9,11 +9,12 @@ end
 function EDIT_NVIMRC()
   require("plenary.reload").reload_module("telescope")
   require("telescope.builtin").find_files(require('telescope.themes').get_dropdown({
+    find_command = { "fd", "--type", "f", "--color", "never", "-I", "-H", "--exclude", "Resources/stable-0.9" },
     prompt_title = "~ nvimrc ~",
     cwd = "~/.config/nvim",
     shorten_path = true,
     no_ignore = true,
-    no_parent_ignore = true,
+    no_ignore_parent = true,
     layout_strategy = "horizontal",
     height = 10,
   }))
