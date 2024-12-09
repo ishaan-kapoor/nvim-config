@@ -35,5 +35,4 @@ function plugin.config()
   chainsaw.setup({ marker = "󱂅" })
 end
 
-return {}
--- return plugin
+return plugin

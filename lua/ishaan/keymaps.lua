@@ -137,6 +137,7 @@ vim.cmd("command! -nargs=0 CP lua CompetetiveProgramming()")
 vim.cmd("command! -nargs=0 ERC lua EDIT_NVIMRC()")
 
 map('t', "<leader><Esc>", "<C-\\><C-n>", { noremap = true })
+-- map('t', "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 -- Extra Functions
 map("v", "<leader>:", function() OpenURL(vim.inspect(GetVisualSelection()[1])) end)

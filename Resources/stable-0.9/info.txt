@@ -1,7 +1,0 @@
-as of 20th March 2024.
-Commit hash: 0ef27180e31671a043b28547da327cd52f1a87c4
-Commit date: 19-Jan-24
-last commit on branch 0.9
-Does not work with lsp list in lualine
-code actions work fine
-

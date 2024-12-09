@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BIN_PATH="/home/ishaan/.local/bin/nvim"
+BIN_PATH="/usr/local/bin/nvim"
 CONFIG_PATH="/home/ishaan/.config/nvim"
 
 rm -f "$CONFIG_PATH/time.log"

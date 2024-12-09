@@ -11,8 +11,8 @@ local intro_logo = {
   "██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║ ",
   "╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ",
   "                                                       ",
-  "                     (Stable) NVIM v0.9.6-dev-0ef2718  ",
-  "                             Released: 19th Jan, 2024  ",
+  "                    (Stable) NVIM v0.10.3-dev-650dcbb  ",
+  "                              Released: 7th Dec, 2024  ",
   "                                                       ",
   "                                                       ",
   "         󰩈  Exit                      q                ",
@@ -27,7 +27,7 @@ local intro_logo = {
   "         󱫙  Frequent Files            f                ",
   "                                                       ",
   "                                                       ",
-  "    :help news<Enter> to see changes in v0.9           ",
+  "    :help news<Enter> to see changes in v0.10          ",
   "    :help iccf<Enter> to help poor children in uganda  ",
 }
 
@@ -177,8 +177,6 @@ local function setup(options)
   })
 end
 
--- return { setup = setup }
-setup()
 function INTRO_SCREEN()
   local default_buff = vim.api.nvim_get_current_buf()
   minintro_buff = create_and_set_minintro_buf(default_buff)
@@ -188,3 +186,4 @@ function INTRO_SCREEN()
 end
 
 vim.cmd("command! Intro lua INTRO_SCREEN()")
+setup()
