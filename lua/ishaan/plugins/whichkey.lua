@@ -9,4 +9,5 @@ function plugin.init()
   vim.o.timeoutlen = 300
 end
 
-return plugin
+-- return plugin
+return {}

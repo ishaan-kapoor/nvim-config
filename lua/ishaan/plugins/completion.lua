@@ -138,6 +138,7 @@ function plugin.config()
       end,
     },
     sources = {
+      { name = "render-markdown" },
       { name = "calc" },
       { name = "path" },
       { name = "luasnip" },

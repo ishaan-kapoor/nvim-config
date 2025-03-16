@@ -7,7 +7,7 @@ map('c', "kj", "<Esc><Esc>", { desc = "Escape from command mode" })
 -- map('n', "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "k when only 1 wrapped line in file" })
 -- map('n', "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "j when only 1 wrapped line in file" })
 
-map('n', "<leader> ", vim.cmd.source, { desc = "Source Current file" } )
+map('n', "<leader> ", function() if (vim.bo.ft == "lua") then vim.cmd.source() end end, { desc = "Source Current file" } )
 map('n', "<leader>o", "o<Esc>", { desc = "Insert new line below" })
 map('n', "<leader>O", "O<Esc>", { desc = "Insert new line above" })
 map('v', "<leader>srt", ":sort<CR>", { desc = "sort selected lines" })

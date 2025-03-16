@@ -18,7 +18,7 @@ local plugin = {
 local function map(key, cmd, desc)
   key = "<leader>" .. key
   local opts = { noremap = true, silent = true, desc = desc }
-  vim.api.nvim_set_keymap("n", key, cmd, opts)
+  vim.keymap.set("n", key, cmd, opts)
 end
 
 function plugin.config()

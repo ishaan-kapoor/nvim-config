@@ -33,17 +33,23 @@ local plugins = {
   'notomo/gesture.nvim',
   'sindrets/winshift.nvim',
   'sirver/ultisnips',
+  'folke/zen-mode.nvim',
+  'folke/twilight.nvim',
+  'LudoPinelli/comment-box.nvim',
+  'MagicDuck/grug-far.nvim',
+  { "HakonHarnes/img-clip.nvim", event = "VeryLazy" },
+  { "NStefan002/screenkey.nvim", lazy = false },
   { "eoh-bse/minintro.nvim", config = true, lazy = false },
-  { "junegunn/goyo.vim", keys = { { "<leader>g", "<cmd>lua require('lualine').hide()<CR><CMD>Goyo<CR>", desc = "Toggle Goyo" } } },
-  { "junegunn/limelight.vim", keys = { "<leader>l" } },
   { "tpope/vim-sleuth", event = "VeryLazy" },
-  { 'mg979/vim-visual-multi', { branch = 'master' } },
+  { "mg979/vim-visual-multi", { branch = "master" } },
   { "declancm/cinnamon.nvim", version = "*", opts = { } },
   {
     'goolord/alpha-nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function() require 'alpha'.setup(require 'alpha.themes.startify'.config) end
   },
+  { "junegunn/goyo.vim", keys = { { "<leader>g", "<cmd>lua require('lualine').hide()<CR><CMD>Goyo<CR>", desc = "Toggle Goyo" } } },
+  { "junegunn/limelight.vim", keys = { "<leader>l" } },
 }
 
 local opts = {

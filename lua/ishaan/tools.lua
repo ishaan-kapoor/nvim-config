@@ -169,8 +169,6 @@ function Compile(terminal, debug)
   terminal = terminal or false
   debug = debug or false
   vim.cmd("up")
-  -- local buf = vim.api.nvim_get_current_buf()
-  -- local ft = vim.api.nvim_buf_get_option(buf, "filetype")
   local ft = vim.bo.filetype
   if ft == "java" then
     -- Rest is handled by ~/.config/nvim/after/ftplugin/java.lua
@@ -195,8 +193,7 @@ function Compile(terminal, debug)
     vim.cmd("term " .. command)
     vim.cmd("startinsert")
   else
-    -- vim.cmd("!" .. command)
-    local uv = vim.loop
+    local uv = vim.uv
     local error_pipe = uv.new_pipe()
     local opts = {
       args = { vim.fn.expand("%"), "-o", vim.fn.expand("%<") },
@@ -207,12 +204,21 @@ function Compile(terminal, debug)
       if status == 0 then
         print("Compiled")
       else
-        print(status)
-        uv.read_start(error_pipe, function(_, data) if data then print(data) end end)
+        print("Compilation failed with status:" .. status)
+        uv.read_start(error_pipe, function(_, data)
+          if data then
+            print("Error: ", data)
+          end
+          uv.close(error_pipe)
+        end)
       end
       uv.close(handler)
     end
     handler = uv.spawn(compiler, opts, on_exit)
+    if not handler then
+      print("Failed to spawn process")
+      uv.close(error_pipe)
+    end
   end
 end
 
@@ -227,7 +233,7 @@ end
 
 local function is_executable(file)
   local v = vim.api.nvim_exec2("!file " .. file, { output = true })
-  if string.find(v.output, "executable", 0, true) then
+  if string.find(v.output, "shell script", 0, true) then
     return true;
   else
     return false;
@@ -262,7 +268,7 @@ function RunCode(terminal)
       command = "java -cp out %:p"
     elseif has_value(compiled_langugages, ft) then
       Compile()
-      command = "./%<"
+      command = "./%<; rm %<"
     else
       print("Couldn't run FileType: " .. ft)
       return;
@@ -511,7 +517,7 @@ function LSP_onAttach(client, bufnr)
       apply = true
     })
   end
-  opts.desc = "Quick Fix"; map('n', '<leader>qf', quickfix, opts)
+  opts.desc = "Quick Fix Error"; map('n', '<leader>qfa', quickfix, opts)
   opts.desc = "Restart LSP"; map('n', "<leader>lR", ":LspRestart<CR>", opts);
   -- opts.desc = "Format Document"; map('n', "<leader>gf", vim.lsp.buf.format, opts);
   opts.desc = "Go to Definition"; map('n', "gd", telescope.lsp_definitions, opts);                -- map('n', "gd", vim.lsp.buf.definition, opts)
@@ -522,7 +528,7 @@ function LSP_onAttach(client, bufnr)
   opts.desc = "Telescope type Definitions"; map('n', "gt", telescope.lsp_type_definitions, opts); -- map('n', "gt", vim.lsp.buf.type_definition, opts)
   opts.desc = "LSP Hover"; map('n', "K", vim.lsp.buf.hover, opts);
   opts.desc = "LSP Workspace Symbol"; map('n', "<leader>ws", vim.lsp.buf.workspace_symbol, opts);
-  -- opts.desc = "Open Diagnostic Float"; map('n', "<leader>vd", vim.diagnostic.open_float, opts); -- autocommand executed on cursor hold
+  opts.desc = "Open Diagnstic Float"; map('n', "<leader>vd", vim.diagnostic.open_float, opts); -- autocommand executed on cursor hold
   -- opts.desc = "Telescope Diagnostics"; map('n', "<leader>vD", telescope.diagnostics, opts) -- <leader>fd in Telescope
   opts.desc = "next Diagnostic"; map('n', "]d", vim.diagnostic.goto_next, opts);
   opts.desc = "prev Diagnostic"; map('n', "[d", vim.diagnostic.goto_prev, opts);
@@ -533,6 +539,7 @@ function LSP_onAttach(client, bufnr)
   opts.desc = "Remove Workspace folder"; map('n', "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts);
   opts.desc = "List workspace Folder"; map('n', "<leader>wl",
     function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts);
+  opts.desc = "Open to QF list"; map('n', "<leader>qf", vim.diagnostic.setqflist, opts)
   -- opts.desc = "Show line diagnostics"; map('n', "<leader>l", vim.lsp.diagnostic.show_line_diagnostics, opts)
   -- opts.desc = "Set Loclist"; map('n', "<leader>q", vim.lsp.diagnostic.set_loclist, opts)
   -- map('n', "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
