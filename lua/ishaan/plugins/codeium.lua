@@ -8,4 +8,5 @@ local plugin = {
   event = "VeryLazy",
 }
 
-return plugin
+-- return plugin
+return {}

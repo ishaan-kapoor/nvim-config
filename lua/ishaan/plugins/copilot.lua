@@ -44,4 +44,5 @@ local copilot_cmp = {
   },
   config = true,
 }
-return { copilot_lua, copilot_cmp }
+-- return { copilot_lua, copilot_cmp }
+return {}
